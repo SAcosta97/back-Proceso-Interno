@@ -1,16 +1,21 @@
-package com.backmantenedor.models;
+package com.backmantenedor.services;
 
-
+import javax.persistence.Column;
 
 public class ApiRouteDTO {
 
-
     private Long id;
+
     private String path;
+
     private String method;
+
     private String uri;
+
     private String tipo;
-    private Boolean estado;
+
+    private String estado;
+
     private  String ip;
 
     public Long getId() {
@@ -53,11 +58,11 @@ public class ApiRouteDTO {
         this.tipo = tipo;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

@@ -1,8 +1,7 @@
 package com.backmantenedor.controller;
 
-import com.backmantenedor.models.ApiRouteDTO;
-
 import com.backmantenedor.models.GuardarApirouteDTO;
+import com.backmantenedor.services.ApiRouteDTO;
 import com.backmantenedor.services.ApiRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

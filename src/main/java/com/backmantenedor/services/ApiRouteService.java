@@ -1,14 +1,12 @@
 package com.backmantenedor.services;
 
 import com.backmantenedor.entity.ApiRoute;
-import com.backmantenedor.mapper.ApirouteMapper;
-import com.backmantenedor.models.ApiRouteDTO;
+import com.backmantenedor.mapper.ApiRouteMapper;
 import com.backmantenedor.models.GuardarApirouteDTO;
 import com.backmantenedor.repository.ApirouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +16,7 @@ public class ApiRouteService {
 
 
     @Autowired
-    private ApirouteMapper apirouteMapper;
+    private ApiRouteMapper apirouteMapper;
 
     @Autowired
     private ApirouteRepository apirouteRepository;
@@ -48,11 +46,11 @@ public class ApiRouteService {
                     if(apiencontrada != null){
                         Optional<ApiRoute> verificar = this.apirouteRepository.findById(apiencontrada.getId());
                         if (verificar.isPresent()){
-                            throw new Exception(MessageFormat.format("Uri {0} ya se encuentra registrada{1}."));
+                           // throw new Exception(MessageFormat.format("Uri {0} ya se encuentra registrada{1}."));
                         }
                     }
 
-                    apiroutedto.setEstado(Boolean.TRUE);
+                   // apiroutedto.setEstado(Boolean.TRUE);
 
                 }
                 this.apirouteRepository.save(apiRoute);
@@ -74,7 +72,7 @@ public class ApiRouteService {
     public List<ApiRouteDTO> obtenerApi(long id) {
 
         try{
-            return apirouteMapper.obtenerApiList(apirouteRepository.findAllById(id));
+            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findAllById(id));
         }
         catch (Exception ex){
             return new ArrayList<>();
@@ -86,7 +84,7 @@ public class ApiRouteService {
     public List<ApiRouteDTO> obtenerPath(String path) {
 
         try {
-            return apirouteMapper.obtenerApiList(apirouteRepository.findByPath(path));
+            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByPath(path));
         } catch (Exception ex) {
             return new ArrayList<>();
         }
@@ -95,7 +93,7 @@ public class ApiRouteService {
         public List<ApiRouteDTO> obtenerMethod(String method) {
 
             try{
-                return apirouteMapper.obtenerApiList(apirouteRepository.findByMethod(method));
+                return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByMethod(method));
             }
             catch (Exception ex){
                 return new ArrayList<>();
@@ -105,7 +103,7 @@ public class ApiRouteService {
         public List<ApiRouteDTO> obtenerTipo(String tipo) {
 
             try{
-                return apirouteMapper.obtenerApiList(apirouteRepository.findByTipo(tipo));
+                return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByTipo(tipo));
             }
             catch (Exception ex){
                 return new ArrayList<>();
