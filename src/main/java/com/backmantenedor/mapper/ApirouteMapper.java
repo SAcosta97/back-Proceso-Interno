@@ -1,7 +1,7 @@
 package com.backmantenedor.mapper;
 
-import com.backmantenedor.entity.Api_route;
-import com.backmantenedor.models.Api_routeDTO;
+import com.backmantenedor.entity.ApiRoute;
+import com.backmantenedor.models.ApiRouteDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,7 +13,7 @@ public interface ApirouteMapper {
 
     ApirouteMapper INSTANCE = Mappers.getMapper(ApirouteMapper.class);
 
-    List<Api_routeDTO> obtenerApiList(List<Api_route>api_route);
+    List<ApiRouteDTO> obtenerApiList(List<ApiRoute>api_route);
 
 
 

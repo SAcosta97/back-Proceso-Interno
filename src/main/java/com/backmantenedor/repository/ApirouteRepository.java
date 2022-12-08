@@ -1,21 +1,21 @@
 package com.backmantenedor.repository;
 
-import com.backmantenedor.entity.Api_route;
+import com.backmantenedor.entity.ApiRoute;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.List;
 
-public interface ApirouteRepository extends JpaRepository<Api_route, Long> {
+public interface ApirouteRepository extends JpaRepository<ApiRoute, Long> {
 
 
-    List<Api_route> findAllById(Long id);
+    List<ApiRoute> findAllById(Long id);
 
-    List<Api_route> findByPath(String path);
+    List<ApiRoute> findByPath(String path);
 
-    List<Api_route> findByMethod(String method);
+    List<ApiRoute> findByMethod(String method);
 
-    List<Api_route> findByTipo (String tipo);
+    List<ApiRoute> findByTipo (String tipo);
 
 
 

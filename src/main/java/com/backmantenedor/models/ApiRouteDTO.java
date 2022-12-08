@@ -2,7 +2,7 @@ package com.backmantenedor.models;
 
 
 
-public class Api_routeDTO {
+public class ApiRouteDTO {
 
 
     private Long id;
@@ -10,7 +10,7 @@ public class Api_routeDTO {
     private String method;
     private String uri;
     private String tipo;
-    private String estado;
+    private Boolean estado;
     private  String ip;
 
     public Long getId() {
@@ -53,11 +53,11 @@ public class Api_routeDTO {
         this.tipo = tipo;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 

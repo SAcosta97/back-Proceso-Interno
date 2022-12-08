@@ -2,12 +2,11 @@ package com.backmantenedor.entity;
 
 
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name ="api_route", schema = "public")
-public class Api_route {
+public class ApiRoute {
 
     @Id
     @Column(name = "id", nullable = false)
