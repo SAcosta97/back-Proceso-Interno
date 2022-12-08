@@ -17,6 +17,8 @@ public interface ApirouteRepository extends JpaRepository<ApiRoute, Long> {
 
     List<ApiRoute> findByTipo (String tipo);
 
+    List<ApiRoute> findAll();
+
 
 
 

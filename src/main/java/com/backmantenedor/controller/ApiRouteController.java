@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/apiroute/")
+@RequestMapping("/api/apiroute")
 public class ApiRouteController {
 
 
@@ -39,5 +39,8 @@ public class ApiRouteController {
 
     @GetMapping("/Tipo")
     public List<ApiRouteDTO> obtenerTipo(@RequestParam String tipo){ return api_routeService.obtenerTipo(tipo);}
+
+    @GetMapping("/Apiroute")
+    public List<ApiRouteDTO> obtenerApiRoute(){ return api_routeService.obtenerApiroute();}
 
 }

@@ -36,26 +36,27 @@ public class ApiRouteService {
                 apiRoute.setPath(apiroutedto.getPath());
                 apiRoute.setMethod(apiroutedto.getMethod());
                 apiRoute.setUri(apiroutedto.getUri());
+                apiRoute.setEstado(apiroutedto.getEstado());
                 apiRoute.setIp(apiroutedto.getIp());
                 apiRoute.setTipo(apiroutedto.getTipo());
 
+                this.apirouteRepository.save(apiRoute);
+
+                } else {
                 //Actualiza
-                ApiRoute api = new ApiRoute();
                 if(apiroutedto.getId()==null){
                     ApiRoute apiencontrada =new ApiRoute();
                     if(apiencontrada != null){
-                        Optional<ApiRoute> verificar = this.apirouteRepository.findById(apiencontrada.getId());
-                        if (verificar.isPresent()){
-                           // throw new Exception(MessageFormat.format("Uri {0} ya se encuentra registrada{1}."));
-                        }
+                        ApiRoute verificar = this.apirouteRepository.findById(apiencontrada.getId()).get();
+                        verificar.setPath(apiroutedto.getPath());
+                        verificar.setMethod(apiroutedto.getMethod());
+                        verificar.setUri(apiroutedto.getUri());
+                        verificar.setEstado(apiroutedto.getEstado());
+                        verificar.setIp(apiroutedto.getIp());
                     }
-
-                   // apiroutedto.setEstado(Boolean.TRUE);
-
                 }
-                this.apirouteRepository.save(apiRoute);
+            }
 
-                }
         }catch (NullPointerException nex){
             apisalida.setMensaje("Uno de los campos obligatorios no fue enviado");
             return apisalida;
@@ -66,6 +67,19 @@ public class ApiRouteService {
         }
         return apisalida;
     }
+
+    public List<ApiRouteDTO> obtenerApiroute() {
+
+        try{
+            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findAll());
+        }
+        catch (Exception ex){
+            return new ArrayList<>();
+        }
+
+
+    }
+
 
 
 
