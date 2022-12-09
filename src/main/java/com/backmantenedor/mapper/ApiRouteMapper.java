@@ -11,4 +11,8 @@ import java.util.List;
 public interface ApiRouteMapper {
 
     List<ApiRouteDTO> apiRouteLsToApiRouteDTO(List<ApiRoute> all);
+
+    ApiRouteDTO toApiRouteTipo(ApiRoute apitipo);
+
+
 }

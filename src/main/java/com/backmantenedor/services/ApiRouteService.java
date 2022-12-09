@@ -2,14 +2,16 @@ package com.backmantenedor.services;
 
 import com.backmantenedor.entity.ApiRoute;
 import com.backmantenedor.mapper.ApiRouteMapper;
+import com.backmantenedor.mapper.MasterTypeElementsMapper;
 import com.backmantenedor.models.GuardarApirouteDTO;
+import com.backmantenedor.models.MasterTypeElementsDTO;
 import com.backmantenedor.repository.ApirouteRepository;
+import com.backmantenedor.repository.MasterTypeElementsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ApiRouteService {
@@ -21,7 +23,11 @@ public class ApiRouteService {
     @Autowired
     private ApirouteRepository apirouteRepository;
 
+    @Autowired
+    private MasterTypeElementsMapper masterTypeElementsMapper;
 
+    @Autowired
+    private MasterTypeElementsRepository masterTypeElementsRepository;
 
     public GuardarApirouteDTO guardarApi(ApiRouteDTO apiroutedto) throws Exception{
 
@@ -114,15 +120,15 @@ public class ApiRouteService {
             }
         }
 
-        public List<ApiRouteDTO> obtenerTipo(String tipo) {
+    public List<MasterTypeElementsDTO> getMaterElement(String typeFilter){
+        try{
+            return masterTypeElementsMapper.masterTypeElementsToMasterTypeElementsDTO(masterTypeElementsRepository.findByTypeFilterAndStateReg(typeFilter, Boolean.TRUE));
 
-            try{
-                return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByTipo(tipo));
-            }
-            catch (Exception ex){
-                return new ArrayList<>();
-            }
+        }catch (Exception ex){
+            return new ArrayList();
         }
+    }
+
 
 
 
