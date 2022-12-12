@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class SecPerfil {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id_perfil", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private Long id;
