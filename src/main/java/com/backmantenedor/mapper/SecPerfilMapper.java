@@ -7,11 +7,8 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface ApiRouteMapper {
+public interface SecPerfilMapper {
 
-    List<ApiRouteDTO> apiRouteLsToApiRouteDTO(List<ApiRoute> all);
-
-    ApiRouteDTO toApiRouteTipo(ApiRoute apitipo);
 
 
 }

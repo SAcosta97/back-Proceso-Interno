@@ -27,7 +27,7 @@ public class ApiRoute {
     private String tipo;
 
     @Column (name = "estado")
-    private String estado;
+    private Boolean estado;
 
     @Column (name = "ip")
     private  String ip;
@@ -72,11 +72,11 @@ public class ApiRoute {
         this.tipo = tipo;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 

@@ -3,6 +3,7 @@ package com.backmantenedor.services;
 import com.backmantenedor.entity.ApiRoute;
 import com.backmantenedor.mapper.ApiRouteMapper;
 import com.backmantenedor.mapper.MasterTypeElementsMapper;
+import com.backmantenedor.models.ApiRouteDTO;
 import com.backmantenedor.models.GuardarApirouteDTO;
 import com.backmantenedor.models.MasterTypeElementsDTO;
 import com.backmantenedor.repository.ApirouteRepository;
@@ -33,12 +34,14 @@ public class ApiRouteService {
 
         GuardarApirouteDTO apisalida = new GuardarApirouteDTO();
         try{
-            if(apiroutedto==null){
-                apisalida.setMensaje("debe enviar un valor valido");
+//            if(apiroutedto!=null){
+//                apisalida.setMensaje("debe enviar un valor valido");
 
                 //crear
                 ApiRoute apiRoute = new ApiRoute();
-                apiRoute.setId(apiroutedto.getId());
+                if(apiroutedto.getId()!=null){
+                    apiRoute.setId(apiroutedto.getId());
+                }
                 apiRoute.setPath(apiroutedto.getPath());
                 apiRoute.setMethod(apiroutedto.getMethod());
                 apiRoute.setUri(apiroutedto.getUri());
@@ -48,20 +51,22 @@ public class ApiRouteService {
 
                 this.apirouteRepository.save(apiRoute);
 
-                } else {
-                //Actualiza
-                if(apiroutedto.getId()==null){
-                    ApiRoute apiencontrada =new ApiRoute();
-                    if(apiencontrada != null){
-                        ApiRoute verificar = this.apirouteRepository.findById(apiencontrada.getId()).get();
-                        verificar.setPath(apiroutedto.getPath());
-                        verificar.setMethod(apiroutedto.getMethod());
-                        verificar.setUri(apiroutedto.getUri());
-                        verificar.setEstado(apiroutedto.getEstado());
-                        verificar.setIp(apiroutedto.getIp());
-                    }
-                }
-            }
+//                } else {
+//                //Actualiza
+//                if(apiroutedto.getId()==null){
+//                    ApiRoute apiencontrada =new ApiRoute();
+//                    if(apiencontrada != null){
+//                        ApiRoute verificar = this.apirouteRepository.findById(apiencontrada.getId()).get();
+//                        verificar.setPath(apiroutedto.getPath());
+//                        verificar.setMethod(apiroutedto.getMethod());
+//                        verificar.setUri(apiroutedto.getUri());
+//                        verificar.setEstado(apiroutedto.getEstado());
+//                        verificar.setIp(apiroutedto.getIp());
+
+//                    }
+//                }
+//            }
+            apisalida.setMensaje("OK");
 
         }catch (NullPointerException nex){
             apisalida.setMensaje("Uno de los campos obligatorios no fue enviado");
@@ -86,6 +91,14 @@ public class ApiRouteService {
 
     }
 
+    public List<MasterTypeElementsDTO> getMaterElement(String typeFilter){
+        try{
+            return masterTypeElementsMapper.masterTypeElementsToMasterTypeElementsDTO(masterTypeElementsRepository.findByTypeFilterAndStateReg(typeFilter, Boolean.TRUE));
+
+        }catch (Exception ex){
+            return new ArrayList();
+        }
+    }
 
 
 
@@ -100,34 +113,27 @@ public class ApiRouteService {
 
 
     }
+//
+//    public List<ApiRouteDTO> obtenerPath(String path) {
+//
+//        try {
+//            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByPath(path));
+//        } catch (Exception ex) {
+//            return new ArrayList<>();
+//        }
+//    }
+//
+//        public List<ApiRouteDTO> obtenerMethod(String method) {
+//
+//            try{
+//                return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByMethod(method));
+//            }
+//            catch (Exception ex){
+//                return new ArrayList<>();
+//            }
+//        }
 
-    public List<ApiRouteDTO> obtenerPath(String path) {
 
-        try {
-            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByPath(path));
-        } catch (Exception ex) {
-            return new ArrayList<>();
-        }
-    }
-
-        public List<ApiRouteDTO> obtenerMethod(String method) {
-
-            try{
-                return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByMethod(method));
-            }
-            catch (Exception ex){
-                return new ArrayList<>();
-            }
-        }
-
-    public List<MasterTypeElementsDTO> getMaterElement(String typeFilter){
-        try{
-            return masterTypeElementsMapper.masterTypeElementsToMasterTypeElementsDTO(masterTypeElementsRepository.findByTypeFilterAndStateReg(typeFilter, Boolean.TRUE));
-
-        }catch (Exception ex){
-            return new ArrayList();
-        }
-    }
 
 
 

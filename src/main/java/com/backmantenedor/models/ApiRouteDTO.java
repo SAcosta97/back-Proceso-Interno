@@ -1,4 +1,4 @@
-package com.backmantenedor.services;
+package com.backmantenedor.models;
 
 import javax.persistence.Column;
 
@@ -14,7 +14,7 @@ public class ApiRouteDTO {
 
     private String tipo;
 
-    private String estado;
+    private Boolean estado;
 
     private  String ip;
 
@@ -58,11 +58,11 @@ public class ApiRouteDTO {
         this.tipo = tipo;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
