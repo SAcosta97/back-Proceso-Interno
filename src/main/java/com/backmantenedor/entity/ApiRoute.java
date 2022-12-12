@@ -32,6 +32,12 @@ public class ApiRoute {
     @Column (name = "ip")
     private  String ip;
 
+    @Column(name = "user_creation")
+    private  String userCreation;
+
+    @Column(name =  "user_update")
+    private  String userUpdate;
+
     public Long getId() {
         return id;
     }
@@ -86,5 +92,21 @@ public class ApiRoute {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getUserCreation() {
+        return userCreation;
+    }
+
+    public void setUserCreation(String userCreation) {
+        this.userCreation = userCreation;
+    }
+
+    public String getUserUpdate() {
+        return userUpdate;
+    }
+
+    public void setUserUpdate(String userUpdate) {
+        this.userUpdate = userUpdate;
     }
 }

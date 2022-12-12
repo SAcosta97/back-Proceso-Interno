@@ -6,6 +6,7 @@ import com.backmantenedor.models.GuardarApirouteDTO;
 import com.backmantenedor.models.MasterTypeElementsDTO;
 import com.backmantenedor.models.SecPerfilDTO;
 import com.backmantenedor.services.ApiRouteService;
+import com.backmantenedor.services.SecPerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +15,27 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/apiroute")
+@RequestMapping("/api/SecPerfil")
 public class SecPerfilController {
 
 
 
-//    @Autowired
-//    private SecPerfil secPerfil;
+    @Autowired
+    private SecPerfilService secPerfil;
 
 
-//    @PostMapping("guardarActualizarApiroute")
-//    public GuardarApirouteDTO guardarPerfil(@RequestBody @Validated SecPerfilDTO Perfil) throws Exception {
-//        return SecPerfil.guardarPerfil(Perfil);
-//    }
-//
-//    @GetMapping("/TypeFilter")
-//    public List<MasterTypeElementsDTO>getMaterElement(@RequestParam String typeFilter){ return api_routeService.getMaterElement(typeFilter); }
+    @PostMapping("guardarActualizarSecPerfil")
+    public GuardarApirouteDTO guardarPerfil(@RequestBody @Validated SecPerfilDTO Perfil) throws Exception {
+        return secPerfil.guardarPerfil(Perfil);
+    }
+
+
+    @GetMapping("/id")
+    public List<SecPerfilDTO> obtenerId(@RequestParam long id){ return secPerfil.ObtenerIdPerfil(id);}
+
+
+    @GetMapping("/Perfil")
+    public List<SecPerfilDTO> obtenerPerfil(){ return secPerfil.obtenerperfil();}
+
+
 }

@@ -41,6 +41,7 @@ public class ApiRouteService {
                 ApiRoute apiRoute = new ApiRoute();
                 if(apiroutedto.getId()!=null){
                     apiRoute.setId(apiroutedto.getId());
+                    apiRoute.setUserUpdate(apiroutedto.getUserUpdate());
                 }
                 apiRoute.setPath(apiroutedto.getPath());
                 apiRoute.setMethod(apiroutedto.getMethod());
@@ -48,24 +49,10 @@ public class ApiRouteService {
                 apiRoute.setEstado(apiroutedto.getEstado());
                 apiRoute.setIp(apiroutedto.getIp());
                 apiRoute.setTipo(apiroutedto.getTipo());
+                apiRoute.setUserCreation(apiroutedto.getUserCreation());
 
                 this.apirouteRepository.save(apiRoute);
 
-//                } else {
-//                //Actualiza
-//                if(apiroutedto.getId()==null){
-//                    ApiRoute apiencontrada =new ApiRoute();
-//                    if(apiencontrada != null){
-//                        ApiRoute verificar = this.apirouteRepository.findById(apiencontrada.getId()).get();
-//                        verificar.setPath(apiroutedto.getPath());
-//                        verificar.setMethod(apiroutedto.getMethod());
-//                        verificar.setUri(apiroutedto.getUri());
-//                        verificar.setEstado(apiroutedto.getEstado());
-//                        verificar.setIp(apiroutedto.getIp());
-
-//                    }
-//                }
-//            }
             apisalida.setMensaje("OK");
 
         }catch (NullPointerException nex){
@@ -87,7 +74,6 @@ public class ApiRouteService {
         catch (Exception ex){
             return new ArrayList<>();
         }
-
 
     }
 

@@ -18,6 +18,10 @@ public class ApiRouteDTO {
 
     private  String ip;
 
+    private String userCreation;
+
+    private String userUpdate;
+
     public Long getId() {
         return id;
     }
@@ -72,5 +76,21 @@ public class ApiRouteDTO {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getUserCreation() {
+        return userCreation;
+    }
+
+    public void setUserCreation(String userCreation) {
+        this.userCreation = userCreation;
+    }
+
+    public String getUserUpdate() {
+        return userUpdate;
+    }
+
+    public void setUserUpdate(String userUpdate) {
+        this.userUpdate = userUpdate;
     }
 }

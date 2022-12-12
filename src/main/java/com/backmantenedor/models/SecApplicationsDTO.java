@@ -1,18 +1,16 @@
 package com.backmantenedor.models;
 
-import java.util.Date;
-
-public class SecPerfilDTO {
+public class SecApplicationsDTO {
 
     private Long id;
 
-    private String nombrePerfil;
+    private String name;
 
-    private Boolean estado;
+    private Boolean status;
 
     private String audit;
 
-    private String observa;
+    private String description;
 
     private String userCreation;
 
@@ -29,22 +27,29 @@ public class SecPerfilDTO {
         this.id = id;
     }
 
-    public String getNombrePerfil() {
-        return nombrePerfil;
+    public String getName() {
+        return name;
     }
 
-    public void setNombrePerfil(String nombrePerfil) {
-        this.nombrePerfil = nombrePerfil;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getAudit() {
         return audit;
@@ -54,14 +59,6 @@ public class SecPerfilDTO {
         this.audit = audit;
     }
 
-
-    public String getObserva() {
-        return observa;
-    }
-
-    public void setObserva(String observa) {
-        this.observa = observa;
-    }
 
     public String getUserCreation() {
         return userCreation;

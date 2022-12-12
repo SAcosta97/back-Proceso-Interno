@@ -6,32 +6,38 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name ="sec_perfil", schema = "public")
-public class SecPerfil {
+@Table(name ="sec_company", schema = "public")
+public class SecCompany {
 
     @Id
-    @Column(name = "id_perfil", nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private Long id;
 
-    @Column(name = "nombre_perfil")
-    private String nombrePerfil;
+    @Column(name = "business_name")
+    private String name;
 
-    @Column(name = "estado")
-    private Boolean estado;
+    @Column(name = "ruc")
+    private String ruc;
+
+    @Column(name = "status")
+    private Boolean status;
+
+    @Column(name = "observation")
+    private String observation;
+
+//    @Column(name = "reference")
+//    private String reference;
 
     @Column(name = "audit")
     private String audit;
 
-    @Column(name = "date_registr")
+    @Column(name = "date_registration")
     private Date dateRegistr;
 
     @Column(name = "date_update")
     private Date dateUpdate;
-
-    @Column(name = "observa")
-    private String observa;
 
     @Column(name = "user_creation")
     private  String userCreation;
@@ -47,22 +53,6 @@ public class SecPerfil {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNombrePerfil() {
-        return nombrePerfil;
-    }
-
-    public void setNombrePerfil(String nombrePerfil) {
-        this.nombrePerfil = nombrePerfil;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
     }
 
     public String getAudit() {
@@ -89,14 +79,6 @@ public class SecPerfil {
         this.dateUpdate = dateUpdate;
     }
 
-    public String getObserva() {
-        return observa;
-    }
-
-    public void setObserva(String observa) {
-        this.observa = observa;
-    }
-
     public String getUserCreation() {
         return userCreation;
     }
@@ -112,6 +94,46 @@ public class SecPerfil {
     public void setUserUpdate(String userUpdate) {
         this.userUpdate = userUpdate;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+//    public String getReference() {
+//        return reference;
+//    }
+//
+//    public void setReference(String reference) {
+//        this.reference = reference;
+//    }
 }
 
 

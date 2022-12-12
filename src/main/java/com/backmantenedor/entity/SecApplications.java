@@ -6,20 +6,23 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name ="sec_perfil", schema = "public")
-public class SecPerfil {
+@Table(name ="sec_applications", schema = "public")
+public class SecApplications {
 
     @Id
-    @Column(name = "id_perfil", nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private Long id;
 
-    @Column(name = "nombre_perfil")
-    private String nombrePerfil;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "estado")
-    private Boolean estado;
+    @Column(name = "status")
+    private Boolean status;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "audit")
     private String audit;
@@ -29,9 +32,6 @@ public class SecPerfil {
 
     @Column(name = "date_update")
     private Date dateUpdate;
-
-    @Column(name = "observa")
-    private String observa;
 
     @Column(name = "user_creation")
     private  String userCreation;
@@ -49,21 +49,6 @@ public class SecPerfil {
         this.id = id;
     }
 
-    public String getNombrePerfil() {
-        return nombrePerfil;
-    }
-
-    public void setNombrePerfil(String nombrePerfil) {
-        this.nombrePerfil = nombrePerfil;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
 
     public String getAudit() {
         return audit;
@@ -89,14 +74,6 @@ public class SecPerfil {
         this.dateUpdate = dateUpdate;
     }
 
-    public String getObserva() {
-        return observa;
-    }
-
-    public void setObserva(String observa) {
-        this.observa = observa;
-    }
-
     public String getUserCreation() {
         return userCreation;
     }
@@ -111,6 +88,30 @@ public class SecPerfil {
 
     public void setUserUpdate(String userUpdate) {
         this.userUpdate = userUpdate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 
