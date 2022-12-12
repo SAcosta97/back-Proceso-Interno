@@ -1,5 +1,7 @@
 package com.backmantenedor.controller;
 
+import com.backmantenedor.entity.ApiRoute;
+import com.backmantenedor.models.ApiDataDTO;
 import com.backmantenedor.models.GuardarApirouteDTO;
 import com.backmantenedor.models.MasterTypeElementsDTO;
 import com.backmantenedor.models.ApiRouteDTO;
@@ -28,14 +30,11 @@ public class ApiRouteController {
     @GetMapping("/id")
     public List<ApiRouteDTO> obtenerId(@RequestParam long id){ return api_routeService.obtenerApi(id);}
 
-   /* @GetMapping("/Path")
-    public List<ApiRouteDTO> obtenerPath(@RequestParam String path){ return api_routeService.obtenerPath(path);}
+//    @GetMapping("/tipo")
+//    public List<ApiRouteDTO> obtenerTipo(@RequestParam String tipo){ return api_routeService.obtenerTipo(tipo);}
 
-    @GetMapping("/Method")
-    public List<ApiRouteDTO> obtenerMethod(@RequestParam String method){ return api_routeService.obtenerMethod(method);}*/
-
-    @GetMapping("/Apiroute")
-    public List<ApiRouteDTO> obtenerApiRoute(){ return api_routeService.obtenerApiroute();}
+    @PostMapping("/Apiroute")
+    public List<ApiRouteDTO> obtenerApiRoute(@RequestBody @Validated ApiDataDTO data){ return api_routeService.obtenerApiroute(data);}
 
     @GetMapping("/TypeFilter")
     public List<MasterTypeElementsDTO>getMaterElement(@RequestParam String typeFilter){ return api_routeService.getMaterElement(typeFilter); }

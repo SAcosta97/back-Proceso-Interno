@@ -3,9 +3,11 @@ package com.backmantenedor.services;
 import com.backmantenedor.entity.ApiRoute;
 import com.backmantenedor.mapper.ApiRouteMapper;
 import com.backmantenedor.mapper.MasterTypeElementsMapper;
+import com.backmantenedor.models.ApiDataDTO;
 import com.backmantenedor.models.ApiRouteDTO;
 import com.backmantenedor.models.GuardarApirouteDTO;
 import com.backmantenedor.models.MasterTypeElementsDTO;
+import com.backmantenedor.repository.ApiRouterRepositor;
 import com.backmantenedor.repository.ApirouteRepository;
 import com.backmantenedor.repository.MasterTypeElementsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,10 @@ public class ApiRouteService {
 
     @Autowired
     private MasterTypeElementsRepository masterTypeElementsRepository;
+
+    @Autowired
+    private ApiRouterRepositor apiRouterRepositor;
+
 
     public GuardarApirouteDTO guardarApi(ApiRouteDTO apiroutedto) throws Exception{
 
@@ -66,14 +72,19 @@ public class ApiRouteService {
         return apisalida;
     }
 
-    public List<ApiRouteDTO> obtenerApiroute() {
+    public List<ApiRouteDTO> obtenerApiroute(ApiDataDTO data) {
+
+        ApiRouteDTO salida = new ApiRouteDTO();
 
         try{
-            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findAll());
+            return apirouteMapper.apiRouteLsToApiRouteDTO(apiRouterRepositor.dataApiRouter());
         }
         catch (Exception ex){
             return new ArrayList<>();
         }
+
+
+
 
     }
 
@@ -99,25 +110,17 @@ public class ApiRouteService {
 
 
     }
-//
-//    public List<ApiRouteDTO> obtenerPath(String path) {
+
+//    public List<ApiRouteDTO> obtenerTipo(String tipo) {
 //
 //        try {
-//            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByPath(path));
+//            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByTipo(tipo));
 //        } catch (Exception ex) {
 //            return new ArrayList<>();
 //        }
 //    }
-//
-//        public List<ApiRouteDTO> obtenerMethod(String method) {
-//
-//            try{
-//                return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByMethod(method));
-//            }
-//            catch (Exception ex){
-//                return new ArrayList<>();
-//            }
-//        }
+
+
 
 
 

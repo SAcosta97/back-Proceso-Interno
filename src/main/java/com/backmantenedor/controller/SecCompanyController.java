@@ -32,7 +32,7 @@ public class SecCompanyController {
     public List<SecCompanyDTO> obtenerId(@RequestParam long id){ return secCompany.ObtenerIdCompany(id);}
 
 
-    @GetMapping("/Perfil")
+    @GetMapping("/Company")
     public List<SecCompanyDTO> obtenerApp(){ return secCompany.obtenerCompany();}
 
 
