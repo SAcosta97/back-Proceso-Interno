@@ -38,6 +38,9 @@ public class ApiRoute {
     @Column(name =  "user_update")
     private  String userUpdate;
 
+    @Column(name = "fecha_creacion")
+    private String fechaCreacion;
+
     public Long getId() {
         return id;
     }
@@ -108,5 +111,13 @@ public class ApiRoute {
 
     public void setUserUpdate(String userUpdate) {
         this.userUpdate = userUpdate;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 }

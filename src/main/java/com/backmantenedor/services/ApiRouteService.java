@@ -3,14 +3,13 @@ package com.backmantenedor.services;
 import com.backmantenedor.entity.ApiRoute;
 import com.backmantenedor.mapper.ApiRouteMapper;
 import com.backmantenedor.mapper.MasterTypeElementsMapper;
-import com.backmantenedor.models.ApiDataDTO;
-import com.backmantenedor.models.ApiRouteDTO;
-import com.backmantenedor.models.GuardarApirouteDTO;
-import com.backmantenedor.models.MasterTypeElementsDTO;
+import com.backmantenedor.models.*;
 import com.backmantenedor.repository.ApiRouterRepositor;
 import com.backmantenedor.repository.ApirouteRepository;
 import com.backmantenedor.repository.MasterTypeElementsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -74,17 +73,12 @@ public class ApiRouteService {
 
     public List<ApiRouteDTO> obtenerApiroute(ApiDataDTO data) {
 
-        ApiRouteDTO salida = new ApiRouteDTO();
-
         try{
-            return apirouteMapper.apiRouteLsToApiRouteDTO(apiRouterRepositor.dataApiRouter());
+            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByTipo(/*data.getMethod(),*/ data.getTipo()));
         }
         catch (Exception ex){
             return new ArrayList<>();
         }
-
-
-
 
     }
 
@@ -97,8 +91,6 @@ public class ApiRouteService {
         }
     }
 
-
-
     public List<ApiRouteDTO> obtenerApi(long id) {
 
         try{
@@ -108,21 +100,45 @@ public class ApiRouteService {
             return new ArrayList<>();
         }
 
-
     }
 
-//    public List<ApiRouteDTO> obtenerTipo(String tipo) {
-//
-//        try {
-//            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByTipo(tipo));
-//        } catch (Exception ex) {
-//            return new ArrayList<>();
-//        }
-//    }
+    public ResponseApiRoutePagineo consultaApi(BusquedaDTO busquedaDTO){
+
+        ResponseApiRoutePagineo salida = new ResponseApiRoutePagineo();
+        int totalReg = obtenerApiGeneral(busquedaDTO).size();
+        if (totalReg > 0) {
+            int page = busquedaDTO.getPage() > 0 ? (busquedaDTO.getPage() - 1) : 0;
+            PageRequest pgRq = PageRequest.of(page, busquedaDTO.getReg_por_pag());
+            salida.setTotalRegistro(totalReg);
+            salida.setApi(obtenerApiPag(pgRq, busquedaDTO));
+            salida.setMensaje("OK");
+        }else {
+            salida.setApi(null);
+            salida.setTotalRegistro(0);
+            salida.setMensaje("No existen datos");
+
+        }
+        return salida;
+    }
+
+        //PAGINADO
+    public List<ApiRouteDTO> obtenerApiGeneral(BusquedaDTO busqueda){
+        if (busqueda.getFechaIni() != null && busqueda.getFechaFin() != null && !busqueda.getFechaIni().equals("") && !busqueda.getFechaFin().equals("")) {
+            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.getAPiSinPag(busqueda.getFechaIni(), busqueda.getFechaFin()));
+        }
+        return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findAll());
+    }
 
 
+    public List<ApiRouteDTO> obtenerApiPag(Pageable pagineo, BusquedaDTO busqueda){
 
+        if(busqueda.getFechaIni() != null && busqueda.getFechaFin()!=null && !busqueda.getFechaIni().equals("") && !busqueda.getFechaFin().equals("")){
 
+            return apirouteMapper.toApiRouteDTOPageList(apirouteRepository.getAPiFiltro(busqueda.getFechaIni(), busqueda.getFechaFin(),pagineo));
+        }
+        return apirouteMapper.toApiRouteDTOPageList(apirouteRepository.findAll(pagineo));
+
+    }
 
 
 

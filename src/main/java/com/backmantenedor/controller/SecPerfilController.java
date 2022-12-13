@@ -1,10 +1,8 @@
 package com.backmantenedor.controller;
 
+import com.backmantenedor.Util.PerfilDataDTO;
 import com.backmantenedor.entity.SecPerfil;
-import com.backmantenedor.models.ApiRouteDTO;
-import com.backmantenedor.models.GuardarApirouteDTO;
-import com.backmantenedor.models.MasterTypeElementsDTO;
-import com.backmantenedor.models.SecPerfilDTO;
+import com.backmantenedor.models.*;
 import com.backmantenedor.services.ApiRouteService;
 import com.backmantenedor.services.SecPerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +23,16 @@ public class SecPerfilController {
 
 
     @PostMapping("guardarActualizarSecPerfil")
-    public GuardarApirouteDTO guardarPerfil(@RequestBody @Validated SecPerfilDTO Perfil) throws Exception {
-        return secPerfil.guardarPerfil(Perfil);
-    }
+    public GuardarApirouteDTO guardarPerfil(@RequestBody @Validated SecPerfilDTO Perfil) throws Exception {return secPerfil.guardarPerfil(Perfil);}
 
+    @PostMapping("/Paginacion")
+    public ResponsePerfilPagineo consultarPerfil (@RequestBody @Validated BusquedaDTO busqueda){ return secPerfil.obtenerPerfil(busqueda);}
 
     @GetMapping("/id")
     public List<SecPerfilDTO> obtenerId(@RequestParam long id){ return secPerfil.ObtenerIdPerfil(id);}
 
-
-    @GetMapping("/Perfil")
-    public List<SecPerfilDTO> obtenerPerfil(){ return secPerfil.obtenerperfil();}
+    @PostMapping("/Perfil")
+    public List<SecPerfilDTO> obtenerPerfil(@RequestBody @Validated PerfilDataDTO perfildata){ return secPerfil.obtenerperfil(perfildata);}
 
 
 }

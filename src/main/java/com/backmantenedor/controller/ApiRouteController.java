@@ -1,10 +1,7 @@
 package com.backmantenedor.controller;
 
 import com.backmantenedor.entity.ApiRoute;
-import com.backmantenedor.models.ApiDataDTO;
-import com.backmantenedor.models.GuardarApirouteDTO;
-import com.backmantenedor.models.MasterTypeElementsDTO;
-import com.backmantenedor.models.ApiRouteDTO;
+import com.backmantenedor.models.*;
 import com.backmantenedor.services.ApiRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -30,12 +27,14 @@ public class ApiRouteController {
     @GetMapping("/id")
     public List<ApiRouteDTO> obtenerId(@RequestParam long id){ return api_routeService.obtenerApi(id);}
 
-//    @GetMapping("/tipo")
-//    public List<ApiRouteDTO> obtenerTipo(@RequestParam String tipo){ return api_routeService.obtenerTipo(tipo);}
+    @PostMapping("/Paginacion")
+    public ResponseApiRoutePagineo consultarApi (@RequestBody @Validated BusquedaDTO busqueda){ return api_routeService.consultaApi(busqueda);}
 
     @PostMapping("/Apiroute")
     public List<ApiRouteDTO> obtenerApiRoute(@RequestBody @Validated ApiDataDTO data){ return api_routeService.obtenerApiroute(data);}
 
     @GetMapping("/TypeFilter")
     public List<MasterTypeElementsDTO>getMaterElement(@RequestParam String typeFilter){ return api_routeService.getMaterElement(typeFilter); }
+
+
 }
