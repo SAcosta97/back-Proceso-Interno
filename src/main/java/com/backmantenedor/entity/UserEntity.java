@@ -4,6 +4,10 @@ package com.backmantenedor.entity;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name ="user_entity", schema = "public")
@@ -11,9 +15,9 @@ public class UserEntity {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
-    private Long id;
+    /*@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Nullable*/
+    private String id;
 
     @Column(name = "username")
     private String username;
@@ -30,8 +34,15 @@ public class UserEntity {
     @Column (name = "enable")
     private Boolean enable;
 
-    @Column (name = "realm_id")
-    private  Long realmId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "realm_id")
+    private RealmEntity realmEntity;
+
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
+    @org.springframework.lang.Nullable
+    private List<SecUserCompany> userCompany;
 
     @Column(name = "user_creation")
     private  String userCreation;
@@ -39,11 +50,12 @@ public class UserEntity {
     @Column(name =  "user_update")
     private  String userUpdate;
 
-    public Long getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -87,12 +99,13 @@ public class UserEntity {
         this.enable = enable;
     }
 
-    public Long getRealmId() {
-        return realmId;
+
+    public RealmEntity getRealmEntity() {
+        return realmEntity;
     }
 
-    public void setRealmId(Long realmId) {
-        this.realmId = realmId;
+    public void setRealmEntity(RealmEntity realmEntity) {
+        this.realmEntity = realmEntity;
     }
 
     public String getUserCreation() {
@@ -110,4 +123,17 @@ public class UserEntity {
     public void setUserUpdate(String userUpdate) {
         this.userUpdate = userUpdate;
     }
+
+    public List<SecUserCompany> getUserCompany() {
+        return userCompany;
+    }
+
+    public void setUserCompany(List<SecUserCompany> userCompany) {
+        this.userCompany = userCompany;
+    }
 }
+
+
+
+
+

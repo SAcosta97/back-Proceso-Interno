@@ -1,8 +1,6 @@
 package com.backmantenedor.services;
 
-import com.backmantenedor.Util.PerfilDataDTO;
 import com.backmantenedor.Util.Utility;
-import com.backmantenedor.entity.ApiRoute;
 import com.backmantenedor.entity.SecPerfil;
 import com.backmantenedor.mapper.SecPerfilMapper;
 import com.backmantenedor.models.*;
@@ -29,9 +27,9 @@ public class SecPerfilService {
 
 
 
-    public GuardarApirouteDTO guardarPerfil (SecPerfilDTO secPerfilDTO) throws Exception {
+    public SaveMantDTO saveUpdatePerfil (SecPerfilDTO secPerfilDTO) throws Exception {
 
-        GuardarApirouteDTO perfilsalida = new GuardarApirouteDTO();
+        SaveMantDTO exit = new SaveMantDTO();
         try {
 
             //crear
@@ -51,31 +49,52 @@ public class SecPerfilService {
 
             this.secPerfilRepository.save(secPerfil);
 
-            perfilsalida.setMensaje("OK");
+            exit.setMessage("OK");
 
         }catch (NullPointerException nex){
-            perfilsalida.setMensaje("Uno de los campos obligatorios no fue enviado");
-            return perfilsalida;
+            exit.setMessage("Uno de los campos obligatorios no fue enviado");
+            return exit;
         }
 
         catch ( Exception ex){
-            perfilsalida.setMensaje(ex.getMessage());
+            exit.setMessage(ex.getMessage());
         }
-        return perfilsalida;
-    }
-        //BUSQUEDA
-    public List<SecPerfilDTO> obtenerperfil( PerfilDataDTO perfildata) {
-
-        try{
-            return secPerfilMapper.secPerfilToSecPerfilDTO(secPerfilRepository.findByNombrePerfil(perfildata.getNombrePerfil()));
-        }
-        catch (Exception ex){
-            return new ArrayList<>();
-        }
-
+        return exit;
     }
 
-    public List<SecPerfilDTO> ObtenerIdPerfil(long id) {
+
+    //PAGINADO
+    public ResponsePerfilPagination consultPerfil(SearchDTO searchDTO){
+
+        ResponsePerfilPagination exit = new ResponsePerfilPagination();
+        int totalReg = getPerfilGeneral(searchDTO).size();
+        if (totalReg > 0) {
+            int page = searchDTO.getPage() > 0 ? (searchDTO.getPage() - 1) : 0;
+            PageRequest pgRq = PageRequest.of(page, searchDTO.getReg_por_pag());
+            exit.setTotalRegister(totalReg);
+            exit.setPerfil(getPerfilPag(pgRq, searchDTO));
+            exit.setMessage("OK");
+        }else {
+            exit.setPerfil(null);
+            exit.setTotalRegister(0);
+            exit.setMessage("No existen datos");
+
+        }
+        return exit;
+    }
+
+
+    public List<SecPerfilDTO> getPerfilGeneral(SearchDTO busqueda){
+
+        return secPerfilMapper.secPerfilToSecPerfilDTO(secPerfilRepository.getPerfilSinPag(busqueda.getNombrePerfil()));
+    }
+
+
+    public List<SecPerfilDTO> getPerfilPag(Pageable pagineo, SearchDTO busqueda){
+
+        return secPerfilMapper.toPerfilDTOPageList(secPerfilRepository.getPerfilFiltro(busqueda.getNombrePerfil(),pagineo));
+    }
+    public List<SecPerfilDTO> getIdPerfil(long id) {
 
         try{
             return secPerfilMapper.secPerfilToSecPerfilDTO(secPerfilRepository.findAllById(id));
@@ -85,47 +104,6 @@ public class SecPerfilService {
         }
 
     }
-
-    //PAGINADO
-    public ResponsePerfilPagineo obtenerPerfil(BusquedaDTO busquedaDTO){
-
-        ResponsePerfilPagineo salida = new ResponsePerfilPagineo();
-        int totalReg = obtenerPerfilGeneral(busquedaDTO).size();
-        if (totalReg > 0) {
-            int page = busquedaDTO.getPage() > 0 ? (busquedaDTO.getPage() - 1) : 0;
-            PageRequest pgRq = PageRequest.of(page, busquedaDTO.getReg_por_pag());
-            salida.setTotalRegistro(totalReg);
-            salida.setPerfil(obtenerPerfilPag(pgRq, busquedaDTO));
-            salida.setMensaje("OK");
-        }else {
-            salida.setPerfil(null);
-            salida.setTotalRegistro(0);
-            salida.setMensaje("No existen datos");
-
-        }
-        return salida;
-    }
-
-
-    public List<SecPerfilDTO> obtenerPerfilGeneral(BusquedaDTO busqueda){
-        if (busqueda.getFechaIni() != null && busqueda.getFechaFin() != null && !busqueda.getFechaIni().equals("") && !busqueda.getFechaFin().equals("")) {
-            return secPerfilMapper.secPerfilToSecPerfilDTO(secPerfilRepository.getPerfilSinPag(busqueda.getFechaIni(), busqueda.getFechaFin()));
-        }
-        return secPerfilMapper.secPerfilToSecPerfilDTO(secPerfilRepository.findAll());
-    }
-
-
-    public List<SecPerfilDTO> obtenerPerfilPag(Pageable pagineo, BusquedaDTO busqueda){
-
-        if(busqueda.getFechaIni() != null && busqueda.getFechaFin()!=null && !busqueda.getFechaIni().equals("") && !busqueda.getFechaFin().equals("")){
-
-            return secPerfilMapper.toPerfilDTOPageList(secPerfilRepository.getPerfilFiltro(busqueda.getFechaIni(), busqueda.getFechaFin(),pagineo));
-        }
-        return secPerfilMapper.toPerfilDTOPageList(secPerfilRepository.findAll(pagineo));
-
-    }
-
-
 
 
 }

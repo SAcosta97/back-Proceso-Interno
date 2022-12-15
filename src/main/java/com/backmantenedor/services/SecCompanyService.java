@@ -1,16 +1,13 @@
 package com.backmantenedor.services;
 
 import com.backmantenedor.Util.Utility;
-import com.backmantenedor.entity.SecApplications;
 import com.backmantenedor.entity.SecCompany;
-import com.backmantenedor.mapper.SecApplicationsMapper;
 import com.backmantenedor.mapper.SecCompanyMapper;
-import com.backmantenedor.models.GuardarApirouteDTO;
-import com.backmantenedor.models.SecApplicationsDTO;
-import com.backmantenedor.models.SecCompanyDTO;
-import com.backmantenedor.repository.SecApplicationsRepository;
+import com.backmantenedor.models.*;
 import com.backmantenedor.repository.SecCompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,9 +27,9 @@ public class SecCompanyService {
 
 
 
-    public GuardarApirouteDTO guardarApplicatoins (SecCompanyDTO secCompanyDTO) throws Exception {
+    public SaveMantDTO saveUpdateSecCompany (SecCompanyDTO secCompanyDTO) throws Exception {
 
-        GuardarApirouteDTO companysalida = new GuardarApirouteDTO();
+        SaveMantDTO exit = new SaveMantDTO();
         try {
 
             //crear
@@ -48,36 +45,57 @@ public class SecCompanyService {
             secCompany.setAudit(secCompanyDTO.getAudit());
             secCompany.setDateRegistr(utility.obtenergetdateNow());
             secCompany.setStatus(secCompanyDTO.getStatus());
-            secCompanyDTO.setObservation(secCompanyDTO.getObservation());
-            secCompanyDTO.setUserCreation(secCompanyDTO.getUserCreation());
+            secCompany.setObservation(secCompanyDTO.getObservation());
+            secCompany.setUserCreation(secCompanyDTO.getUserCreation());
 
             this.secCompanyRepository.save(secCompany);
 
-            companysalida.setMensaje("OK");
+            exit.setMessage("OK");
 
         }catch (NullPointerException nex){
-            companysalida.setMensaje("Uno de los campos obligatorios no fue enviado");
-            return companysalida;
+            exit.setMessage("Uno de los campos obligatorios no fue enviado");
+            return exit;
         }
 
         catch ( Exception ex){
-            companysalida.setMensaje(ex.getMessage());
+            exit.setMessage(ex.getMessage());
         }
-        return companysalida;
+        return exit;
     }
 
-    public List<SecCompanyDTO> obtenerCompany() {
 
-        try{
-            return secCompanyMapper.secCompanyToSecCompanyDTO(secCompanyRepository.findAll());
-        }
-        catch (Exception ex){
-            return new ArrayList<>();
-        }
+    //PAGINATION
+    public ResponseCompanyPagination consultCompany(SearchDTO searchDTO){
 
+        ResponseCompanyPagination exit = new ResponseCompanyPagination();
+        int totalReg = getCompanyGeneral(searchDTO).size();
+        if (totalReg > 0) {
+            int page = searchDTO.getPage() > 0 ? (searchDTO.getPage() - 1) : 0;
+            PageRequest pgRq = PageRequest.of(page, searchDTO.getReg_por_pag());
+            exit.setTotalRegister(totalReg);
+            exit.setCompany(getCompanyPag(pgRq, searchDTO));
+            exit.setMessage("OK");
+        }else {
+            exit.setCompany(null);
+            exit.setTotalRegister(0);
+            exit.setMessage("No existen datos");
+
+        }
+        return exit;
     }
 
-    public List<SecCompanyDTO> ObtenerIdCompany(long id) {
+
+    public List<SecCompanyDTO> getCompanyGeneral(SearchDTO busqueda){
+
+        return secCompanyMapper.secCompanyToSecCompanyDTO(secCompanyRepository.getCompSinPag(busqueda.getName(), busqueda.getRuc()));}
+
+
+    public List<SecCompanyDTO> getCompanyPag(Pageable pagineo, SearchDTO busqueda){
+
+        return secCompanyMapper.toCompanyDTOPageList(secCompanyRepository.getCompFiltro(busqueda.getName(), busqueda.getRuc(), pagineo));}
+
+
+    public List<SecCompanyDTO> getIdCompany(long id) {
 
         try{
             return secCompanyMapper.secCompanyToSecCompanyDTO(secCompanyRepository.findAllById(id));

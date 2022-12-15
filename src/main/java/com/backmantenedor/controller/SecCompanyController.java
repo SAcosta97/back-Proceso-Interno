@@ -1,9 +1,6 @@
 package com.backmantenedor.controller;
 
-import com.backmantenedor.models.GuardarApirouteDTO;
-import com.backmantenedor.models.SecApplicationsDTO;
-import com.backmantenedor.models.SecCompanyDTO;
-import com.backmantenedor.services.SecApplicationsService;
+import com.backmantenedor.models.*;
 import com.backmantenedor.services.SecCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -22,18 +19,19 @@ public class SecCompanyController {
     private SecCompanyService secCompany;
 
 
-    @PostMapping("guardarActualizarSecCompany")
-    public GuardarApirouteDTO guardarPerfil(@RequestBody @Validated SecCompanyDTO Company ) throws Exception {
-        return secCompany.guardarApplicatoins(Company);
+    @PostMapping("saveUpdateSecCompany")
+    public SaveMantDTO saveUpdateSecCompany(@RequestBody @Validated SecCompanyDTO Company ) throws Exception {
+        return secCompany.saveUpdateSecCompany(Company);
     }
+
+    @PostMapping("/consult")
+    public ResponseCompanyPagination consultCompany (@RequestBody @Validated SearchDTO busqueda){ return secCompany.consultCompany(busqueda);}
 
 
     @GetMapping("/id")
-    public List<SecCompanyDTO> obtenerId(@RequestParam long id){ return secCompany.ObtenerIdCompany(id);}
+    public List<SecCompanyDTO> getId(@RequestParam long id){ return secCompany.getIdCompany(id);}
 
 
-    @GetMapping("/Company")
-    public List<SecCompanyDTO> obtenerApp(){ return secCompany.obtenerCompany();}
 
 
 }

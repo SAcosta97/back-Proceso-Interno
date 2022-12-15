@@ -4,6 +4,8 @@ import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name ="sec_company", schema = "public")
@@ -45,6 +47,9 @@ public class SecCompany {
     @Column(name =  "user_update")
     private  String userUpdate;
 
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secCompany")
+//    @org.springframework.lang.Nullable
+    private Set<SecUserCompany> secCompany = new HashSet<>();
 
 
     public Long getId() {

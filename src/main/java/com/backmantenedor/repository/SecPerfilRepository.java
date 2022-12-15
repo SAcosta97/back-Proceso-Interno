@@ -15,23 +15,21 @@ public interface SecPerfilRepository extends JpaRepository<SecPerfil, Long> {
 
     List<SecPerfil> findAllById(Long id);
 
-    List<SecPerfil> findByNombrePerfil(String nombrePerfil);
+//    List<SecPerfil> findByNombrePerfil(String nombrePerfil);
 
     List<SecPerfil> findAll();
 
 
-    @Query(nativeQuery = false, value = "SELECT cabe from SecPerfil cabe"
-            + " where to_char(cabe.dateRegistr,'yyyy-MM-dd') between :fechaIni and :fechaFin "
-            + " order by cabe.id asc ")
-    Page<SecPerfil> getPerfilFiltro(@Param("fechaIni") String fechaIni, @Param("fechaFin") String fechaFin, Pageable pageable);
+    @Query(nativeQuery = false, value = "SELECT perf from SecPerfil perf"
+            + " where (perf.nombrePerfil =:nombrePerfil or :nombrePerfil is null) "
+            + " order by perf.id desc ")
+    Page<SecPerfil> getPerfilFiltro(@Param("nombrePerfil") String nombrePerfil, Pageable pageable);
 
 
-    @Query(nativeQuery = false, value = "SELECT cabe from SecPerfil cabe"
-            + " where to_char(cabe.dateRegistr,'yyyy-MM-dd') between :fechaIni and :fechaFin "
-            + " order by cabe.id asc ")
-    List<SecPerfil> getPerfilSinPag(@Param("fechaIni") String fechaIni, @Param("fechaFin") String fechaFin);
-
-
+    @Query(nativeQuery = false, value = "SELECT perf from SecPerfil perf"
+            + " where (perf.nombrePerfil =:nombrePerfil or :nombrePerfil is null)"
+            + " order by perf.id desc ")
+    List<SecPerfil> getPerfilSinPag(@Param("nombrePerfil") String nombrePerfil);
 
 
 

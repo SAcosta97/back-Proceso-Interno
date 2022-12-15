@@ -35,9 +35,9 @@ public class ApiRouteService {
     private ApiRouterRepositor apiRouterRepositor;
 
 
-    public GuardarApirouteDTO guardarApi(ApiRouteDTO apiroutedto) throws Exception{
+    public SaveMantDTO saveApi (ApiRouteDTO apiroutedto) throws Exception{
 
-        GuardarApirouteDTO apisalida = new GuardarApirouteDTO();
+        SaveMantDTO apisalida = new SaveMantDTO();
         try{
 //            if(apiroutedto!=null){
 //                apisalida.setMensaje("debe enviar un valor valido");
@@ -58,29 +58,19 @@ public class ApiRouteService {
 
                 this.apirouteRepository.save(apiRoute);
 
-            apisalida.setMensaje("OK");
+            apisalida.setMessage("OK");
 
         }catch (NullPointerException nex){
-            apisalida.setMensaje("Uno de los campos obligatorios no fue enviado");
+            apisalida.setMessage("Uno de los campos obligatorios no fue enviado");
             return apisalida;
         }
 
         catch ( Exception ex){
-            apisalida.setMensaje(ex.getMessage());
+            apisalida.setMessage(ex.getMessage());
         }
         return apisalida;
     }
 
-    public List<ApiRouteDTO> obtenerApiroute(ApiDataDTO data) {
-
-        try{
-            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findByTipo(/*data.getMethod(),*/ data.getTipo()));
-        }
-        catch (Exception ex){
-            return new ArrayList<>();
-        }
-
-    }
 
     public List<MasterTypeElementsDTO> getMaterElement(String typeFilter){
         try{
@@ -91,7 +81,7 @@ public class ApiRouteService {
         }
     }
 
-    public List<ApiRouteDTO> obtenerApi(long id) {
+    public List<ApiRouteDTO> getId (long id) {
 
         try{
             return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findAllById(id));
@@ -102,45 +92,42 @@ public class ApiRouteService {
 
     }
 
-    public ResponseApiRoutePagineo consultaApi(BusquedaDTO busquedaDTO){
 
-        ResponseApiRoutePagineo salida = new ResponseApiRoutePagineo();
-        int totalReg = obtenerApiGeneral(busquedaDTO).size();
+    //PAGINADO
+    public ResponseApiRoutePagination consultApi(SearchDTO searchDTO){
+
+        ResponseApiRoutePagination exit = new ResponseApiRoutePagination();
+        int totalReg = obtenerApiGeneral(searchDTO).size();
         if (totalReg > 0) {
-            int page = busquedaDTO.getPage() > 0 ? (busquedaDTO.getPage() - 1) : 0;
-            PageRequest pgRq = PageRequest.of(page, busquedaDTO.getReg_por_pag());
-            salida.setTotalRegistro(totalReg);
-            salida.setApi(obtenerApiPag(pgRq, busquedaDTO));
-            salida.setMensaje("OK");
+            int page = searchDTO.getPage() > 0 ? (searchDTO.getPage() - 1) : 0;
+            PageRequest pgRq = PageRequest.of(page, searchDTO.getReg_por_pag());
+            exit.setTotalRegister(totalReg);
+            exit.setApi(obtenerApiPag(pgRq, searchDTO));
+            exit.setMessage("OK");
         }else {
-            salida.setApi(null);
-            salida.setTotalRegistro(0);
-            salida.setMensaje("No existen datos");
+            exit.setApi(null);
+            exit.setTotalRegister(0);
+            exit.setMessage("No existen datos");
 
         }
-        return salida;
-    }
-
-        //PAGINADO
-    public List<ApiRouteDTO> obtenerApiGeneral(BusquedaDTO busqueda){
-        if (busqueda.getFechaIni() != null && busqueda.getFechaFin() != null && !busqueda.getFechaIni().equals("") && !busqueda.getFechaFin().equals("")) {
-            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.getAPiSinPag(busqueda.getFechaIni(), busqueda.getFechaFin()));
-        }
-        return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.findAll());
+        return exit;
     }
 
 
-    public List<ApiRouteDTO> obtenerApiPag(Pageable pagineo, BusquedaDTO busqueda){
+    public List<ApiRouteDTO> obtenerApiGeneral(SearchDTO busqueda){
 
-        if(busqueda.getFechaIni() != null && busqueda.getFechaFin()!=null && !busqueda.getFechaIni().equals("") && !busqueda.getFechaFin().equals("")){
 
-            return apirouteMapper.toApiRouteDTOPageList(apirouteRepository.getAPiFiltro(busqueda.getFechaIni(), busqueda.getFechaFin(),pagineo));
-        }
-        return apirouteMapper.toApiRouteDTOPageList(apirouteRepository.findAll(pagineo));
+
+            return apirouteMapper.apiRouteLsToApiRouteDTO(apirouteRepository.getAPiSinPag(busqueda.getTipo()));
 
     }
 
 
+    public List<ApiRouteDTO> obtenerApiPag(Pageable pagineo, SearchDTO busqueda){
+
+        return apirouteMapper.toApiRouteDTOPageList(apirouteRepository.getAPiFiltro(busqueda.getTipo(),pagineo));
+
+    }
 
 
 

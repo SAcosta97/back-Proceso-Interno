@@ -3,6 +3,7 @@ package com.backmantenedor.entity;
 
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name ="api_route", schema = "public")
@@ -39,7 +40,7 @@ public class ApiRoute {
     private  String userUpdate;
 
     @Column(name = "fecha_creacion")
-    private String fechaCreacion;
+    private Date fechaCreacion;
 
     public Long getId() {
         return id;
@@ -113,11 +114,11 @@ public class ApiRoute {
         this.userUpdate = userUpdate;
     }
 
-    public String getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 }

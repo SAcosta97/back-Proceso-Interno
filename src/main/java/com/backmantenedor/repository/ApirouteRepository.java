@@ -20,16 +20,16 @@ public interface ApirouteRepository extends JpaRepository<ApiRoute, Long> {
 
     List<ApiRoute> findByTipo(/*String method,*/ String tipo);
 
-    @Query(nativeQuery = false, value = "SELECT cabe from ApiRoute cabe"
-            + " where to_char(cabe.fechaCreacion,'yyyy-MM-dd') between :fechaIni and :fechaFin "
-            + " order by cabe.id asc ")
-    Page<ApiRoute> getAPiFiltro(@Param("fechaIni") String fechaIni, @Param("fechaFin") String fechaFin, Pageable pageable);
+    @Query(nativeQuery = false, value = "SELECT api from ApiRoute api"
+            + " where (api.tipo =:tipo or :tipo is null) "
+            + " order by api.id desc ")
+    Page<ApiRoute> getAPiFiltro(@Param("tipo") String tipo,  Pageable pageable);
 
 
-    @Query(nativeQuery = false, value = "SELECT cabe from ApiRoute cabe"
-            + " where to_char(cabe.fechaCreacion,'yyyy-MM-dd') between :fechaIni and :fechaFin "
-            + " order by cabe.id asc ")
-    List<ApiRoute> getAPiSinPag(@Param("fechaIni") String fechaIni, @Param("fechaFin") String fechaFin);
+    @Query(nativeQuery = false, value = "SELECT api from ApiRoute api"
+            + " where (api.tipo =:tipo or :tipo is null) "
+            + " order by api.id desc ")
+    List<ApiRoute> getAPiSinPag( @Param("tipo") String tipo);
 
 
 

@@ -2,15 +2,12 @@ package com.backmantenedor.services;
 
 import com.backmantenedor.Util.Utility;
 import com.backmantenedor.entity.SecApplications;
-import com.backmantenedor.entity.SecPerfil;
 import com.backmantenedor.mapper.SecApplicationsMapper;
-import com.backmantenedor.mapper.SecPerfilMapper;
-import com.backmantenedor.models.GuardarApirouteDTO;
-import com.backmantenedor.models.SecApplicationsDTO;
-import com.backmantenedor.models.SecPerfilDTO;
+import com.backmantenedor.models.*;
 import com.backmantenedor.repository.SecApplicationsRepository;
-import com.backmantenedor.repository.SecPerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,9 +27,9 @@ public class SecApplicationsService {
 
 
 
-    public GuardarApirouteDTO guardarApplicatoins (SecApplicationsDTO secApplicationsDTO) throws Exception {
+    public SaveMantDTO saveUpdateApplications (SecApplicationsDTO secApplicationsDTO) throws Exception {
 
-        GuardarApirouteDTO applsalida = new GuardarApirouteDTO();
+        SaveMantDTO applExit = new SaveMantDTO();
         try {
 
             //crear
@@ -54,31 +51,55 @@ public class SecApplicationsService {
 
             this.secApplicationsRepository.save(secApplications);
 
-            applsalida.setMensaje("OK");
+            applExit.setMessage("OK");
 
         }catch (NullPointerException nex){
-            applsalida.setMensaje("Uno de los campos obligatorios no fue enviado");
-            return applsalida;
+            applExit.setMessage("Uno de los campos obligatorios no fue enviado");
+            return applExit;
         }
 
         catch ( Exception ex){
-            applsalida.setMensaje(ex.getMessage());
+            applExit.setMessage(ex.getMessage());
         }
-        return applsalida;
+        return applExit;
     }
 
-    public List<SecApplicationsDTO> obtenerApp() {
+    //PAGINADO
 
-        try{
-            return secApplicationsMapper.secApplicationsToSecApplicationsDTO(secApplicationsRepository.findAll());
+    public ResponseApplicationsPagination consultApp(SearchDTO searchDTO){
+
+        ResponseApplicationsPagination exit = new ResponseApplicationsPagination();
+        int totalReg = getAppGeneral(searchDTO).size();
+        if (totalReg > 0) {
+            int page = searchDTO.getPage() > 0 ? (searchDTO.getPage() - 1) : 0;
+            PageRequest pgRq = PageRequest.of(page, searchDTO.getReg_por_pag());
+            exit.setTotalRegister(totalReg);
+            exit.setApp(getAppPag(pgRq, searchDTO));
+            exit.setMessage("OK");
+        }else {
+            exit.setApp(null);
+            exit.setTotalRegister(0);
+            exit.setMessage("No existen datos");
+
         }
-        catch (Exception ex){
-            return new ArrayList<>();
-        }
+        return exit;
+    }
+
+
+    public List<SecApplicationsDTO> getAppGeneral(SearchDTO busqueda){
+
+        return secApplicationsMapper.secApplicationsToSecApplicationsDTO(secApplicationsRepository.getAppSinPag(busqueda.getName()));
 
     }
 
-    public List<SecApplicationsDTO> ObtenerIdApp(long id) {
+
+    public List<SecApplicationsDTO> getAppPag(Pageable pagineo, SearchDTO busqueda){
+
+        return secApplicationsMapper.toSecAppicationsDTOPageList(secApplicationsRepository.getAppFiltro(busqueda.getName(),pagineo));
+
+    }
+
+    public List<SecApplicationsDTO> getIdApp(long id) {
 
         try{
             return secApplicationsMapper.secApplicationsToSecApplicationsDTO(secApplicationsRepository.findAllById(id));

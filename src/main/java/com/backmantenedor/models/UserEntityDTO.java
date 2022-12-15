@@ -1,25 +1,31 @@
 package com.backmantenedor.models;
 
-import javax.persistence.Column;
+import com.backmantenedor.entity.RealmEntity;
+import com.backmantenedor.entity.SecUserCompany;
+
+import java.util.List;
+import java.util.UUID;
 
 public class UserEntityDTO {
 
 
-    private Long id;
+    private String id;
     private String username;
     private String email;
     private String firstName;
-    private  String lastName;
+    private String lastName;
     private Boolean enable;
-    private  Long realmId;
+    private String realmEntity;
+    private String userCompany;
+
     private  String userCreation;
     private  String userUpdate;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,6 +35,22 @@ public class UserEntityDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getRealmEntity() {
+        return realmEntity;
+    }
+
+    public void setRealmEntity(String realmEntity) {
+        this.realmEntity = realmEntity;
+    }
+
+    public String getUserCompany() {
+        return userCompany;
+    }
+
+    public void setUserCompany(String userCompany) {
+        this.userCompany = userCompany;
     }
 
     public String getEmail() {
@@ -63,13 +85,6 @@ public class UserEntityDTO {
         this.enable = enable;
     }
 
-    public Long getRealmId() {
-        return realmId;
-    }
-
-    public void setRealmId(Long realmId) {
-        this.realmId = realmId;
-    }
 
     public String getUserCreation() {
         return userCreation;
