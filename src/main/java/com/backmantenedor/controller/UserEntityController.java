@@ -1,6 +1,6 @@
 package com.backmantenedor.controller;
 
-import com.backmantenedor.entity.UserEntity;
+import com.backmantenedor.Util.UserEntityObject;
 import com.backmantenedor.models.*;
 import com.backmantenedor.services.UserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class UserEntityController {
     public ResponseUserPagination consultUser (@RequestBody @Validated SearchDTO busqueda){ return userEntityService.consultusuario(busqueda);}
 
 
-    @GetMapping("/User")
-    public List<UserEntity> getUser(){ return userEntityService.getUser();}
+    @GetMapping("/getUserNotCompany")
+    public List<GetUserDTO> getUser( ){ return userEntityService.getUserNotCompany();}
 
 }
 

@@ -15,13 +15,8 @@ import java.util.List;
 
 public interface SecCompanyRepository extends JpaRepository<SecCompany, Long> {
 
-    List<SecCompany> findAllById(Long id);
-
-//    List<SecCompany> findById(Long id);
-
     List<SecCompany> findAll();
 
-//    List<SecCompany> findByNameAndRuc(String name, String ruc);
 
     @Query(nativeQuery = false, value = "SELECT comp from SecCompany comp"
             + " where (comp.name =:name or :name is null)" +
@@ -35,6 +30,11 @@ public interface SecCompanyRepository extends JpaRepository<SecCompany, Long> {
             " and (comp.ruc =:ruc or :ruc is null)"
             + " order by comp.id desc ")
     List<SecCompany> getCompSinPag( @Param("name") String name, @Param("ruc")String ruc);
+
+
+
+
+
 
 
 

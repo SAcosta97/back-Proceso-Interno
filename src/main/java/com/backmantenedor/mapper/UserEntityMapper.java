@@ -1,5 +1,6 @@
 package com.backmantenedor.mapper;
 
+import com.backmantenedor.Util.UserEntityObject;
 import com.backmantenedor.entity.UserEntity;
 import com.backmantenedor.models.GetUserDTO;
 import com.backmantenedor.models.UserEntityDTO;
@@ -12,7 +13,7 @@ public interface UserEntityMapper  {
 
 
 
-    List<UserEntity> userEntityToUserEntityDTO (List<UserEntity> all);
+    List<GetUserDTO> userEntityToUserEntityDTO (List<UserEntity> all);
 
 
 }

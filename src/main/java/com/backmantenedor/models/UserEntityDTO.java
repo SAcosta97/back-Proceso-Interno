@@ -17,7 +17,6 @@ public class UserEntityDTO {
     private Boolean enable;
     private String realmEntity;
     private String userCompany;
-
     private  String userCreation;
     private  String userUpdate;
 

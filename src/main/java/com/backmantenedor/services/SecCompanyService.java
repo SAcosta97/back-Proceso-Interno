@@ -65,15 +65,15 @@ public class SecCompanyService {
 
 
     //PAGINATION
-    public ResponseCompanyPagination consultCompany(SearchDTO searchDTO){
+    public ResponseCompanyPagination consultCompany(SearchDTO search){
 
         ResponseCompanyPagination exit = new ResponseCompanyPagination();
-        int totalReg = getCompanyGeneral(searchDTO).size();
+        int totalReg = getCompanyGeneral(search).size();
         if (totalReg > 0) {
-            int page = searchDTO.getPage() > 0 ? (searchDTO.getPage() - 1) : 0;
-            PageRequest pgRq = PageRequest.of(page, searchDTO.getReg_por_pag());
+            int page = search.getPage() > 0 ? (search.getPage() - 1) : 0;
+            PageRequest pgRq = PageRequest.of(page, search.getReg_por_pag());
             exit.setTotalRegister(totalReg);
-            exit.setCompany(getCompanyPag(pgRq, searchDTO));
+            exit.setCompany(getCompanyPag(pgRq, search));
             exit.setMessage("OK");
         }else {
             exit.setCompany(null);
@@ -95,16 +95,7 @@ public class SecCompanyService {
         return secCompanyMapper.toCompanyDTOPageList(secCompanyRepository.getCompFiltro(busqueda.getName(), busqueda.getRuc(), pagineo));}
 
 
-    public List<SecCompanyDTO> getIdCompany(long id) {
 
-        try{
-            return secCompanyMapper.secCompanyToSecCompanyDTO(secCompanyRepository.findAllById(id));
-        }
-        catch (Exception ex){
-            return new ArrayList<>();
-        }
-
-    }
 
 
 }

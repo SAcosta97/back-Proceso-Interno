@@ -10,10 +10,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UserEntityRepository extends JpaRepository<UserEntity, Long> {
+public interface UserEntityRepository extends JpaRepository<UserEntity, String> {
 
 
-    @Query(nativeQuery = false, value =  " select ue.id, ue.username, ue.lastName, ue.firstName, ri.name as realme, sc.name, sc.ruc,sc.observation" +
+    @Query(nativeQuery = false, value =  " select ue.id, ue.username, ue.lastName, ue.firstName, ue.email,  ri.name as realme, sc.name, sc.ruc,sc.observation" +
             " from UserEntity ue" +
             " join ue.realmEntity ri" +
             " join ue.userCompany uc" +
@@ -34,11 +34,15 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, Long> {
     int cantityUserPag (@Param("username") String username);
 
 
-    @Query(nativeQuery = false, value =  " select ue.username" +
-            " from UserEntity ue" +
+    @Query(nativeQuery = false, value = " from UserEntity ue" +
             " join ue.realmEntity r"+
-            " where  r.name <>'master'")
-    List<UserEntity> getUser ( );
+            " where  r.name <>'master'" +
+            " and ue.username <> 'service-account-api-gateway'")
+    List<UserEntity> getUserNotCompany ( );
+
+
+    UserEntity deleteById();
+
 
 
 

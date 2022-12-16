@@ -41,7 +41,7 @@ public class UserEntity {
 
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
-    @org.springframework.lang.Nullable
+
     private List<SecUserCompany> userCompany;
 
     @Column(name = "user_creation")

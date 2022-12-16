@@ -1,7 +1,6 @@
 package com.backmantenedor.services;
 
 import com.backmantenedor.Util.UserEntityObject;
-import com.backmantenedor.entity.UserEntity;
 import com.backmantenedor.mapper.UserEntityMapper;
 import com.backmantenedor.models.*;
 import com.backmantenedor.repository.UserEntityRepository;
@@ -88,10 +87,10 @@ public class UserEntityService {
         return exit;
     }
 
-    public List<UserEntityObject> getUserPagination(PageRequest pgRq, SearchDTO busqueda)
+    public List<UserEntityObject> getUserPagination(PageRequest pgRq, SearchDTO search)
     {
         List<UserEntityObject> lsSalida=new ArrayList<>();
-        Page<Object[]>  userEntityObjectLis =  userEntityRepository.getUserSinPag(busqueda.getUsername(), pgRq);
+        Page<Object[]>  userEntityObjectLis =  userEntityRepository.getUserSinPag(search.getUsername(), pgRq);
 
 
         for (Object[] objects : userEntityObjectLis)
@@ -99,12 +98,13 @@ public class UserEntityService {
             UserEntityObject userDTO=new UserEntityObject();
             userDTO.setId(objects[0].toString());
             userDTO.setUsername(objects[1].toString());
-            userDTO.setLastName(objects[2].toString());
-            userDTO.setFirstName(objects[3].toString());
-            userDTO.setRealme(objects[4].toString());
-            userDTO.setObservation(objects[7].toString());
-            userDTO.setNameCompany(objects[5].toString());
-            userDTO.setRuc(objects[6].toString());
+            userDTO.setLastName(objects[3].toString());
+            userDTO.setEmail(objects[2].toString());
+            userDTO.setFirstName(objects[4].toString());
+            userDTO.setRealme(objects[5].toString());
+            userDTO.setObservation(objects[8].toString());
+            userDTO.setNameCompany(objects[6].toString());
+            userDTO.setRuc(objects[7].toString());
             lsSalida.add(userDTO);
         }
         return lsSalida;
@@ -114,10 +114,10 @@ public class UserEntityService {
 
 
 
-    public List<UserEntity> getUser() {
+    public List<GetUserDTO> getUserNotCompany() {
 
         try {
-            return userEntityMapper.userEntityToUserEntityDTO(userEntityRepository.getUser());
+            return userEntityMapper.userEntityToUserEntityDTO(userEntityRepository.getUserNotCompany());
         } catch (Exception ex) {
             return new ArrayList<>();
         }

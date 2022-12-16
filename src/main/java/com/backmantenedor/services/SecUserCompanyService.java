@@ -1,0 +1,97 @@
+package com.backmantenedor.services;
+
+import com.backmantenedor.Util.UserEntityObject;
+import com.backmantenedor.Util.Utility;
+import com.backmantenedor.entity.SecCompany;
+import com.backmantenedor.entity.SecUserCompany;
+import com.backmantenedor.entity.UserEntity;
+import com.backmantenedor.mapper.SecCompanyMapper;
+import com.backmantenedor.mapper.SecUserCompanyMapper;
+import com.backmantenedor.models.*;
+import com.backmantenedor.repository.SecCompanyRepository;
+import com.backmantenedor.repository.SecUserCompanyRepository;
+import com.backmantenedor.repository.UserEntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class SecUserCompanyService {
+
+    @Autowired
+    private SecUserCompanyRepository secUserCompanyRepository;
+
+    @Autowired
+    private SecUserCompanyMapper secUserCompanyMapper;
+
+    @Autowired
+    private SecCompanyRepository secCompanyRepository;
+
+    @Autowired
+    private UserEntityRepository userEntityRepository;
+
+    @Autowired
+    private Utility utility;
+
+
+    public SecUserCompanyDTO getUsersCompany_NotCompany(Long idCompany) {
+
+        SecUserCompanyDTO secUserCompanyexit = new SecUserCompanyDTO();
+      if(idCompany != null){
+          List<UserEntity> lsUserComp = secUserCompanyRepository.getUsersComp(idCompany);
+          List<UserEntity> lsUserNotComp = secUserCompanyRepository.getUsersNotCompany();
+
+          secUserCompanyexit.setUsersComp(secUserCompanyMapper.toUserEntityToUserEntityDTO(lsUserComp));
+          secUserCompanyexit.setUsersNotComp(secUserCompanyMapper.toUserEntityToUserEntityDTO(lsUserNotComp));
+
+      }
+      return secUserCompanyexit;
+
+    }
+
+    public SaveMantDTO insertDeleteUserComp(EntryUserCompany entryUserCompany) throws Exception{
+
+
+        SaveMantDTO exit= new SaveMantDTO();
+
+        if(entryUserCompany.getFlagCreation()){
+
+            //insert
+           for(String st: entryUserCompany.getUsercomp()){
+               SecUserCompany secUserCompany = new SecUserCompany();
+               SecCompany secCompany = secCompanyRepository.findById(entryUserCompany.getIdCompany()).get();
+               secUserCompany.setSecCompany(secCompany);
+               secUserCompany.setUserEntity(userEntityRepository.findById(st).get());
+               secUserCompany.setDateRegistr(utility.obtenergetdateNow());
+
+               secUserCompanyRepository.save(secUserCompany);
+
+               exit.setMessage("asignado");
+           }
+
+        }
+        //DELETE
+        for(String st: entryUserCompany.getUsercomp()){
+
+            SecUserCompany secUserCompany =new SecUserCompany();
+
+            secUserCompany.setDateUpdate(utility.obtenergetdateNow());
+            secUserCompany.setUserEntity(userEntityRepository.deleteById());
+//            secUserCompany.setSecCompany(secCompanyRepository.deleteById(););
+
+            exit.setMessage("Eliminado");
+        }
+
+        return exit;
+    }
+
+
+
+
+
+}
