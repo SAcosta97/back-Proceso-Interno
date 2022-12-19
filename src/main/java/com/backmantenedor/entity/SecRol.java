@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name ="sec_company", schema = "public")
+@Table(name ="sec_rol", schema = "public")
 public class SecRol {
 
     @Id

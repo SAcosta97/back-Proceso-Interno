@@ -61,11 +61,13 @@ public class SecRolPerfilService {
                SecRolPerfil secRolPerfil = new SecRolPerfil();
                SecPerfil secPerfil = secPerfilRepository.findById(entryRolPerfil.getIdPerfil()).get();
                secRolPerfil.setSecPerfil(secPerfil);
-               secRolPerfil.setSecRol(secRolRepository.findById(st).get());
+               SecRol rolObt=secRolRepository.findById(st).get();
+
+               secRolPerfil.setSecRol(rolObt);
 
                secRolPerfilRepository.save(secRolPerfil);
 
-               exit.setMessage("Usuarios asignados");
+               exit.setMessage("Roles asignados");
            }
 
         }else{
@@ -73,7 +75,7 @@ public class SecRolPerfilService {
         for(Long st: entryRolPerfil.getRolPerfil()) {
 
             SecRolPerfil secRolPerfil = new SecRolPerfil();
-            secRolPerfil =secRolPerfilRepository.deleteId(st,entryRolPerfil.getRolPerfil());
+            secRolPerfil =secRolPerfilRepository.deleteId(st,entryRolPerfil.getIdPerfil());
 
 
             if(secRolPerfil != null){
@@ -83,7 +85,7 @@ public class SecRolPerfilService {
 
         }
 
-            exit.setMessage("Ususarios Eliminados");
+            exit.setMessage("Roles Eliminados");
         }
 
         return exit;

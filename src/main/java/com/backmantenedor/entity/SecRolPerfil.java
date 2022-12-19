@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name ="sec_users_company", schema = "public")
+@Table(name ="sec_rol_perfil", schema = "public")
 public class SecRolPerfil {
 
 
