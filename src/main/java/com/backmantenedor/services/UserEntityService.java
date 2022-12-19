@@ -3,6 +3,7 @@ package com.backmantenedor.services;
 import com.backmantenedor.Util.UserEntityObject;
 import com.backmantenedor.mapper.UserEntityMapper;
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.Response.ResponseUserPagination;
 import com.backmantenedor.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -4,6 +4,7 @@ import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name ="sec_perfil", schema = "public")
@@ -39,6 +40,8 @@ public class SecPerfil {
     @Column(name =  "user_update")
     private  String userUpdate;
 
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secPerfil")
+    private List<SecRolPerfil> rolPerfil;
 
 
     public Long getId() {
@@ -111,6 +114,14 @@ public class SecPerfil {
 
     public void setUserUpdate(String userUpdate) {
         this.userUpdate = userUpdate;
+    }
+
+    public List<SecRolPerfil> getRolPerfil() {
+        return rolPerfil;
+    }
+
+    public void setRolPerfil(List<SecRolPerfil> rolPerfil) {
+        this.rolPerfil = rolPerfil;
     }
 }
 

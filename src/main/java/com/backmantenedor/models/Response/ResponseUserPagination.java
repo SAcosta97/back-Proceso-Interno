@@ -1,19 +1,21 @@
-package com.backmantenedor.models;
+package com.backmantenedor.models.Response;
+
+import com.backmantenedor.Util.UserEntityObject;
 
 import java.util.List;
 
-public class ResponseCompanyPagination {
+public class ResponseUserPagination {
 
-    private List<SecCompanyDTO> company;
+    private List<UserEntityObject> user;
     private String message;
     private int totalRegister;
 
-    public List<SecCompanyDTO> getCompany() {
-        return company;
+    public List<UserEntityObject> getUser() {
+        return user;
     }
 
-    public void setCompany(List<SecCompanyDTO> company) {
-        this.company = company;
+    public void setUser(List<UserEntityObject> user) {
+        this.user = user;
     }
 
     public String getMessage() {

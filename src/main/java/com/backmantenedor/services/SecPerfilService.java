@@ -4,6 +4,7 @@ import com.backmantenedor.Util.Utility;
 import com.backmantenedor.entity.SecPerfil;
 import com.backmantenedor.mapper.SecPerfilMapper;
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.Response.ResponsePerfilPagination;
 import com.backmantenedor.repository.SecPerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

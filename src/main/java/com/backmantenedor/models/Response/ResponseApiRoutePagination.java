@@ -1,20 +1,22 @@
-package com.backmantenedor.models;
+package com.backmantenedor.models.Response;
+
+import com.backmantenedor.models.ApiRouteDTO;
 
 import java.util.List;
 
-public class ResponseApplicationsPagination {
+public class ResponseApiRoutePagination {
 
-    private List<SecApplicationsDTO> app;
+    private List<ApiRouteDTO> api;
     private String message;
     private int totalRegister;
 
 
-    public List<SecApplicationsDTO> getApp() {
-        return app;
+    public List<ApiRouteDTO> getApi() {
+        return api;
     }
 
-    public void setApp(List<SecApplicationsDTO> app) {
-        this.app = app;
+    public void setApi(List<ApiRouteDTO> api) {
+        this.api = api;
     }
 
     public String getMessage() {

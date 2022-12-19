@@ -4,6 +4,7 @@ import com.backmantenedor.Util.Utility;
 import com.backmantenedor.entity.SecApplications;
 import com.backmantenedor.mapper.SecApplicationsMapper;
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.Response.ResponseApplicationsPagination;
 import com.backmantenedor.repository.SecApplicationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

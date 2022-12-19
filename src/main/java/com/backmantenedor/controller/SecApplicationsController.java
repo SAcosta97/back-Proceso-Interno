@@ -1,6 +1,7 @@
 package com.backmantenedor.controller;
 
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.Response.ResponseApplicationsPagination;
 import com.backmantenedor.services.SecApplicationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

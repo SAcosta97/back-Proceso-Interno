@@ -19,6 +19,8 @@ public class SearchDTO {
     //Company
     private String ruc;
 
+    //Rol
+    private String rol;
 
 
 
@@ -78,5 +80,13 @@ public class SearchDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

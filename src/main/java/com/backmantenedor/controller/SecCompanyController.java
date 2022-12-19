@@ -1,6 +1,8 @@
 package com.backmantenedor.controller;
 
+import com.backmantenedor.Util.EntryUserCompany;
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.Response.ResponseCompanyPagination;
 import com.backmantenedor.services.SecCompanyService;
 import com.backmantenedor.services.SecUserCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;

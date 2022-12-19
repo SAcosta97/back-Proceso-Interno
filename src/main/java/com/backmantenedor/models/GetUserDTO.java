@@ -8,9 +8,7 @@ public class GetUserDTO {
     private String email;
     private String lastName;
     private String firstName;
-//    private String nameCompany;
-//    private String ruc;
-//    private String observation;
+
 
     public String getUsername() {
         return username;

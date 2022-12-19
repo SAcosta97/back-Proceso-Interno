@@ -1,23 +1,18 @@
 package com.backmantenedor.services;
 
-import com.backmantenedor.Util.UserEntityObject;
+import com.backmantenedor.Util.EntryUserCompany;
 import com.backmantenedor.Util.Utility;
 import com.backmantenedor.entity.SecCompany;
 import com.backmantenedor.entity.SecUserCompany;
 import com.backmantenedor.entity.UserEntity;
-import com.backmantenedor.mapper.SecCompanyMapper;
 import com.backmantenedor.mapper.SecUserCompanyMapper;
 import com.backmantenedor.models.*;
 import com.backmantenedor.repository.SecCompanyRepository;
 import com.backmantenedor.repository.SecUserCompanyRepository;
 import com.backmantenedor.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

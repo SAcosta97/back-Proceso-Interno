@@ -1,4 +1,6 @@
-package com.backmantenedor.models;
+package com.backmantenedor.models.Response;
+
+import com.backmantenedor.models.ApiRouteDTO;
 
 import java.util.List;
 

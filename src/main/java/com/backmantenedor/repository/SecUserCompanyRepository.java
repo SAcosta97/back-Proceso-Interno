@@ -1,10 +1,8 @@
 package com.backmantenedor.repository;
 
 
-import com.backmantenedor.entity.SecCompany;
-import com.backmantenedor.entity.SecUserCompany;
+import com.backmantenedor.entity.*;
 
-import com.backmantenedor.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

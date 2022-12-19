@@ -1,20 +1,23 @@
-package com.backmantenedor.models;
+package com.backmantenedor.models.Response;
+
+import com.backmantenedor.models.SecPerfilDTO;
+import com.backmantenedor.models.SecRolDTO;
 
 import java.util.List;
 
-public class ResponseApiRoutePagination {
+public class ResponseRolPagination {
 
-    private List<ApiRouteDTO> api;
+    private List<SecRolDTO> rol;
     private String message;
     private int totalRegister;
 
 
-    public List<ApiRouteDTO> getApi() {
-        return api;
+    public List<SecRolDTO> getRol() {
+        return rol;
     }
 
-    public void setApi(List<ApiRouteDTO> api) {
-        this.api = api;
+    public void setRol(List<SecRolDTO> rol) {
+        this.rol = rol;
     }
 
     public String getMessage() {

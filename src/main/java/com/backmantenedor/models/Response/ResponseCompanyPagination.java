@@ -1,20 +1,21 @@
-package com.backmantenedor.models;
+package com.backmantenedor.models.Response;
+
+import com.backmantenedor.models.SecCompanyDTO;
 
 import java.util.List;
 
-public class ResponsePerfilPagination {
+public class ResponseCompanyPagination {
 
-    private List<SecPerfilDTO> perfil;
+    private List<SecCompanyDTO> company;
     private String message;
     private int totalRegister;
 
-
-    public List<SecPerfilDTO> getPerfil() {
-        return perfil;
+    public List<SecCompanyDTO> getCompany() {
+        return company;
     }
 
-    public void setPerfil(List<SecPerfilDTO> perfil) {
-        this.perfil = perfil;
+    public void setCompany(List<SecCompanyDTO> company) {
+        this.company = company;
     }
 
     public String getMessage() {
