@@ -6,7 +6,7 @@ public class EntryRolPerfil {
 
     private Boolean flagCreation;
 
-    private List<String> rolPerfil;
+    private List<Long> rolPerfil;
 
     private Long idPerfil;
 
@@ -18,11 +18,11 @@ public class EntryRolPerfil {
         this.flagCreation = flagCreation;
     }
 
-    public List<String> getRolPerfil() {
+    public List<Long> getRolPerfil() {
         return rolPerfil;
     }
 
-    public void setRolPerfil(List<String> rolPerfil) {
+    public void setRolPerfil(List<Long> rolPerfil) {
         this.rolPerfil = rolPerfil;
     }
 

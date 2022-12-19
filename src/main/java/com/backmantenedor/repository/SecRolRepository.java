@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface SecRolRepository extends JpaRepository<SecRol, String> {
+public interface SecRolRepository extends JpaRepository<SecRol, Long> {
 
     List<SecRol> findAll();
 

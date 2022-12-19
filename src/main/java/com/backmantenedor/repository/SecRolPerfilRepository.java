@@ -16,7 +16,7 @@ public interface SecRolPerfilRepository extends JpaRepository<SecRolPerfil, Long
             " from SecRolPerfil srp" +
             " where srp.secPerfil.id =:idPerfil" +
             " and srp.secRol.id =:idRol")
-    SecRolPerfil deleteId(@Param("idPerfil") String idPerfil, @Param("idRol") List<String> idRol);
+    SecRolPerfil deleteId(@Param("idPerfil") Long idPerfil, @Param("idRol") List<Long> idRol);
 
 
     @Query(nativeQuery = false, value = "select srp.secRol " +

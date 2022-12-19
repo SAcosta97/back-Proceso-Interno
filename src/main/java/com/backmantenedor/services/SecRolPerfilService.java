@@ -57,7 +57,7 @@ public class SecRolPerfilService {
         if(entryRolPerfil.getFlagCreation()){
 
             //insert
-           for(String st: entryRolPerfil.getRolPerfil()){
+           for(Long st: entryRolPerfil.getRolPerfil()){
                SecRolPerfil secRolPerfil = new SecRolPerfil();
                SecPerfil secPerfil = secPerfilRepository.findById(entryRolPerfil.getIdPerfil()).get();
                secRolPerfil.setSecPerfil(secPerfil);
@@ -70,10 +70,10 @@ public class SecRolPerfilService {
 
         }else{
         //DELETE
-        for(String st: entryRolPerfil.getRolPerfil()) {
+        for(Long st: entryRolPerfil.getRolPerfil()) {
 
             SecRolPerfil secRolPerfil = new SecRolPerfil();
-            secRolPerfil =secRolPerfilRepository.deleteId(st, entryRolPerfil.getRolPerfil());
+            secRolPerfil =secRolPerfilRepository.deleteId(st,entryRolPerfil.getRolPerfil());
 
 
             if(secRolPerfil != null){
