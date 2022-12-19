@@ -1,6 +1,7 @@
 package com.backmantenedor.repository;
 
 
+import com.backmantenedor.entity.SecCompany;
 import com.backmantenedor.entity.SecUserCompany;
 
 import com.backmantenedor.entity.UserEntity;
@@ -11,6 +12,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface SecUserCompanyRepository extends JpaRepository<SecUserCompany, Long> {
+
+
+    @Query(nativeQuery = false, value = "select suc" +
+            " from SecUserCompany suc" +
+            " where suc.userEntity.id =:idUser" +
+            " and suc.secCompany.id =:idCompany")
+    SecUserCompany deleteId(@Param("idUser") String idUser, @Param("idCompany") Long idCompany);
 
 
     @Query(nativeQuery = false, value = "select suc.userEntity " +

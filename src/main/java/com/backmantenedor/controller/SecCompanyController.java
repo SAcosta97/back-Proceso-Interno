@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/SecCompany")
 public class SecCompanyController {
-
 
 
     @Autowired
@@ -35,7 +33,7 @@ public class SecCompanyController {
     @GetMapping("UsersComp")
     public SecUserCompanyDTO getUsersCompany_NotCompany (@RequestParam Long idCompany){ return secUserCompanyService.getUsersCompany_NotCompany(idCompany);}
 
-    @PostMapping("saveUpdateSecCompany")
+    @PostMapping("insertDeleteUserComp")
     public SaveMantDTO insertDeleteUserComp(@RequestBody @Validated EntryUserCompany entryUserCompany ) throws Exception {
         return secUserCompanyService.insertDeleteUserComp(entryUserCompany);
     }

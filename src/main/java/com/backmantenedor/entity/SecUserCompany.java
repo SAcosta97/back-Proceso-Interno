@@ -19,7 +19,7 @@ public class SecUserCompany {
 
 
     @Column(name = "status")
-    private Boolean status;
+    private String status;
 
     @Column(name = "observation")
     private String observation;
@@ -61,11 +61,11 @@ public class SecUserCompany {
         this.id = id;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

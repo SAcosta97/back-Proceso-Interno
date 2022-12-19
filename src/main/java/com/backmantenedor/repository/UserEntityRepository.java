@@ -41,7 +41,6 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, String> 
     List<UserEntity> getUserNotCompany ( );
 
 
-    UserEntity deleteById();
 
 
 

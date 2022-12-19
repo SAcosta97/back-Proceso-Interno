@@ -68,23 +68,29 @@ public class SecUserCompanyService {
                secUserCompany.setSecCompany(secCompany);
                secUserCompany.setUserEntity(userEntityRepository.findById(st).get());
                secUserCompany.setDateRegistr(utility.obtenergetdateNow());
+               secUserCompany.setStatus("A");
 
                secUserCompanyRepository.save(secUserCompany);
 
-               exit.setMessage("asignado");
+               exit.setMessage("Usuarios asignados");
            }
 
-        }
+        }else{
         //DELETE
-        for(String st: entryUserCompany.getUsercomp()){
+        for(String st: entryUserCompany.getUsercomp()) {
 
-            SecUserCompany secUserCompany =new SecUserCompany();
+            SecUserCompany secUserCompany = new SecUserCompany();
+            secUserCompany =secUserCompanyRepository.deleteId(st, entryUserCompany.getIdCompany());
 
-            secUserCompany.setDateUpdate(utility.obtenergetdateNow());
-            secUserCompany.setUserEntity(userEntityRepository.deleteById());
-//            secUserCompany.setSecCompany(secCompanyRepository.deleteById(););
 
-            exit.setMessage("Eliminado");
+            if(secUserCompany != null){
+
+              secUserCompanyRepository.delete(secUserCompany);
+            }
+
+        }
+
+            exit.setMessage("Ususarios Eliminados");
         }
 
         return exit;
