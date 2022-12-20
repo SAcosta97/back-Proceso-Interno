@@ -132,7 +132,16 @@ public class SecCompany {
         this.observation = observation;
     }
 
-//    public String getReference() {
+    public Set<SecUserCompany> getSecCompany() {
+        return secCompany;
+    }
+
+    public void setSecCompany(Set<SecUserCompany> secCompany) {
+        this.secCompany = secCompany;
+    }
+
+
+    //    public String getReference() {
 //        return reference;
 //    }
 //

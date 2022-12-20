@@ -46,7 +46,7 @@ public class SecRolService {
             secRol.setAudit(secRolDTO.getAudit());
             secRol.setRol(secRolDTO.getRol());
             secRol.setDateRegistr(utility.obtenergetdateNow());
-            secRol.setStatus(secRolDTO.getStatus());
+            secRol.setStatus("A");
             secRol.setObservation(secRolDTO.getObservation());
             secRol.setUserCreation(secRolDTO.getUserCreation());
 

@@ -11,7 +11,7 @@ import java.util.List;
 public interface SecRolPerfilRepository extends JpaRepository<SecRolPerfil, Long> {
 
 
-
+    //Eliminar
     @Query(nativeQuery = false, value = "select srp" +
             " from SecRolPerfil srp" +
             " where srp.secPerfil.id =:idPerfil" +

@@ -41,7 +41,7 @@ public class SecPerfil {
     private  String userUpdate;
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secPerfil")
-    private List<SecRolPerfil> rolPerfil;
+    private List<SecRolPerfil> secPerfil;
 
 
     public Long getId() {
@@ -116,12 +116,12 @@ public class SecPerfil {
         this.userUpdate = userUpdate;
     }
 
-    public List<SecRolPerfil> getRolPerfil() {
-        return rolPerfil;
+    public List<SecRolPerfil> getSecPerfil() {
+        return secPerfil;
     }
 
-    public void setRolPerfil(List<SecRolPerfil> rolPerfil) {
-        this.rolPerfil = rolPerfil;
+    public void setSecPerfil(List<SecRolPerfil> secPerfil) {
+        this.secPerfil = secPerfil;
     }
 }
 

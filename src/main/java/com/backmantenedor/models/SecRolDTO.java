@@ -8,9 +8,9 @@ public class SecRolDTO {
 
     private Long id;
 
-    private Boolean status;
+    private String status;
 
-    private String reference;
+//    private Long reference;
 
     private String audit;
 
@@ -34,21 +34,21 @@ public class SecRolDTO {
         this.id = id;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
+//    public String getReference() {
+//        return reference;
+//    }
+//
+//    public void setReference(String reference) {
+//        this.reference = reference;
+//    }
 
     public String getAudit() {
         return audit;

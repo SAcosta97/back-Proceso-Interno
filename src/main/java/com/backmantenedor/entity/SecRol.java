@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name ="sec_rol", schema = "public")
+@Table(name ="sec_role", schema = "public")
 public class SecRol {
 
     @Id
@@ -19,10 +19,10 @@ public class SecRol {
     private Long id;
 
     @Column(name = "status")
-    private Boolean status;
+    private String status;
 
-    @Column(name = "reference")
-    private String reference;
+//    @Column(name = "reference")
+//    private Long reference;
 
     @Column(name = "audit")
     private String audit;
@@ -57,21 +57,21 @@ public class SecRol {
         this.id = id;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
+//    public String getReference() {
+//        return reference;
+//    }
+//
+//    public void setReference(String reference) {
+//        this.reference = reference;
+//    }
 
     public String getAudit() {
         return audit;

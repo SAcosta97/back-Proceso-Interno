@@ -28,7 +28,6 @@ public class SecRolPerfil {
     @JoinColumn(name = "id_perfil")
     private SecPerfil secPerfil ;
 
-
     public Long getId() {
         return id;
     }

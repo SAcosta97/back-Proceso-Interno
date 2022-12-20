@@ -8,7 +8,7 @@ public class EntryRolPerfil {
 
     private List<Long> rolPerfil;
 
-    private Long idPerfil;
+    private Long idRol;
 
     public Boolean getFlagCreation() {
         return flagCreation;
@@ -26,11 +26,11 @@ public class EntryRolPerfil {
         this.rolPerfil = rolPerfil;
     }
 
-    public Long getIdPerfil() {
-        return idPerfil;
+    public Long getIdRol() {
+        return idRol;
     }
 
-    public void setIdPerfil(Long idPerfil) {
-        this.idPerfil = idPerfil;
+    public void setIdRol(Long idRol) {
+        this.idRol = idRol;
     }
 }

@@ -59,11 +59,11 @@ public class SecRolPerfilService {
             //insert
            for(Long st: entryRolPerfil.getRolPerfil()){
                SecRolPerfil secRolPerfil = new SecRolPerfil();
-               SecPerfil secPerfil = secPerfilRepository.findById(entryRolPerfil.getIdPerfil()).get();
-               secRolPerfil.setSecPerfil(secPerfil);
-               SecRol rolObt=secRolRepository.findById(st).get();
+               SecRol secRol = secRolRepository.findById(entryRolPerfil.getIdRol()).get();
+               secRolPerfil.setSecRol(secRol);
+               SecPerfil perfilObt=secPerfilRepository.findById(st).get();
 
-               secRolPerfil.setSecRol(rolObt);
+               secRolPerfil.setSecPerfil(perfilObt);
 
                secRolPerfilRepository.save(secRolPerfil);
 
@@ -75,7 +75,7 @@ public class SecRolPerfilService {
         for(Long st: entryRolPerfil.getRolPerfil()) {
 
             SecRolPerfil secRolPerfil = new SecRolPerfil();
-            secRolPerfil =secRolPerfilRepository.deleteId(st,entryRolPerfil.getIdPerfil());
+            secRolPerfil =secRolPerfilRepository.deleteId(st, entryRolPerfil.getIdRol());
 
 
             if(secRolPerfil != null){
