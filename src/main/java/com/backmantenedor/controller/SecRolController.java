@@ -1,10 +1,10 @@
 package com.backmantenedor.controller;
 
 import com.backmantenedor.Util.EntryRolPerfil;
-import com.backmantenedor.Util.EntryUserCompany;
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.RelationModels.SecRolPerfilDTO;
 import com.backmantenedor.models.Response.ResponseRolPagination;
-import com.backmantenedor.services.SecRolPerfilService;
+import com.backmantenedor.services.RelationServices.SecRolPerfilService;
 import com.backmantenedor.services.SecRolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

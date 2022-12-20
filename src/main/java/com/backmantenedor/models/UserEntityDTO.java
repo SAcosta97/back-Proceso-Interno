@@ -1,11 +1,5 @@
 package com.backmantenedor.models;
 
-import com.backmantenedor.entity.RealmEntity;
-import com.backmantenedor.entity.SecUserCompany;
-
-import java.util.List;
-import java.util.UUID;
-
 public class UserEntityDTO {
 
 

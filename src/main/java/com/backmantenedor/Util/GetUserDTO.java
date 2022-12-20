@@ -1,4 +1,4 @@
-package com.backmantenedor.models;
+package com.backmantenedor.Util;
 
 public class GetUserDTO {
 

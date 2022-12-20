@@ -1,5 +1,7 @@
-package com.backmantenedor.entity;
+package com.backmantenedor.entity.RelationEntity;
 
+import com.backmantenedor.entity.SecPerfil;
+import com.backmantenedor.entity.SecRol;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;

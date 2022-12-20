@@ -1,9 +1,7 @@
 package com.backmantenedor.mapper;
 
-import com.backmantenedor.Util.UserEntityObject;
 import com.backmantenedor.entity.UserEntity;
-import com.backmantenedor.models.GetUserDTO;
-import com.backmantenedor.models.UserEntityDTO;
+import com.backmantenedor.Util.GetUserDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

@@ -1,18 +1,18 @@
-package com.backmantenedor.models;
+package com.backmantenedor.Util;
 
 public class GetRolDTO {
 
 
-    private String id;
+    private Long id;
     private String rol;
     private String observation;
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

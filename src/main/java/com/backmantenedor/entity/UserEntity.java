@@ -1,13 +1,10 @@
 package com.backmantenedor.entity;
 
 
-import groovyjarjarantlr4.v4.runtime.misc.Nullable;
+import com.backmantenedor.entity.RelationEntity.SecUserCompany;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name ="user_entity", schema = "public")

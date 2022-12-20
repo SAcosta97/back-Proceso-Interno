@@ -2,9 +2,10 @@ package com.backmantenedor.controller;
 
 import com.backmantenedor.Util.EntryUserCompany;
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.RelationModels.SecUserCompanyDTO;
 import com.backmantenedor.models.Response.ResponseCompanyPagination;
 import com.backmantenedor.services.SecCompanyService;
-import com.backmantenedor.services.SecUserCompanyService;
+import com.backmantenedor.services.RelationServices.SecUserCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

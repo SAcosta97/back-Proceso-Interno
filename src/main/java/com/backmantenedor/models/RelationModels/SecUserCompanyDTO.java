@@ -1,4 +1,6 @@
-package com.backmantenedor.models;
+package com.backmantenedor.models.RelationModels;
+
+import com.backmantenedor.Util.GetUserDTO;
 
 import java.util.List;
 

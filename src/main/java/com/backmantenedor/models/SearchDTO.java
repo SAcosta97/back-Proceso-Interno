@@ -23,9 +23,6 @@ public class SearchDTO {
     private String rol;
 
 
-
-
-
     public int getPage() {
         return page;
     }
@@ -89,4 +86,6 @@ public class SearchDTO {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+
 }

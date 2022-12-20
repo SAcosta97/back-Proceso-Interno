@@ -1,12 +1,11 @@
 package com.backmantenedor.entity;
 
+import com.backmantenedor.entity.RelationEntity.SecRolPerfil;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name ="sec_role", schema = "public")

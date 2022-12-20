@@ -1,14 +1,15 @@
-package com.backmantenedor.services;
+package com.backmantenedor.services.RelationServices;
 
 import com.backmantenedor.Util.EntryUserCompany;
 import com.backmantenedor.Util.Utility;
 import com.backmantenedor.entity.SecCompany;
-import com.backmantenedor.entity.SecUserCompany;
+import com.backmantenedor.entity.RelationEntity.SecUserCompany;
 import com.backmantenedor.entity.UserEntity;
 import com.backmantenedor.mapper.SecUserCompanyMapper;
 import com.backmantenedor.models.*;
+import com.backmantenedor.models.RelationModels.SecUserCompanyDTO;
 import com.backmantenedor.repository.SecCompanyRepository;
-import com.backmantenedor.repository.SecUserCompanyRepository;
+import com.backmantenedor.repository.RelationRepository.SecUserCompanyRepository;
 import com.backmantenedor.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
