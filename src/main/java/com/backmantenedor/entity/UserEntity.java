@@ -2,6 +2,7 @@ package com.backmantenedor.entity;
 
 
 import com.backmantenedor.entity.RelationEntity.SecUserCompany;
+import com.backmantenedor.entity.RelationEntity.SecUserPerfil;
 
 import javax.persistence.*;
 import java.util.List;
@@ -39,6 +40,9 @@ public class UserEntity {
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
     private List<SecUserCompany> userCompany;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userEntity")
+    private List<SecUserPerfil> secUserPerfil;
 
     @Column(name = "user_creation")
     private  String userCreation;
@@ -126,6 +130,15 @@ public class UserEntity {
 
     public void setUserCompany(List<SecUserCompany> userCompany) {
         this.userCompany = userCompany;
+    }
+
+
+    public List<SecUserPerfil> getSecUserPerfil() {
+        return secUserPerfil;
+    }
+
+    public void setSecUserPerfil(List<SecUserPerfil> secUserPerfil) {
+        this.secUserPerfil = secUserPerfil;
     }
 }
 

@@ -22,14 +22,17 @@ public interface SecRolPerfilRepository extends JpaRepository<SecRolPerfil, Long
 
     @Query(nativeQuery = false, value = "select srp.secRol " +
             "from SecRolPerfil srp " +
-            "where srp.secPerfil.id=:idPerfil")
-    List<SecRol> getRol(@Param("idPerfil") Long idPerfil );
+            "where srp.secRol.id=:idRol")
+    List<SecPerfil> getRol(@Param("idRol") Long idRol );
 
 
-    @Query(nativeQuery = false, value = "select sr " +
-            "from SecRol sr" +
-            " where (select count(srp) from SecRolPerfil srp where srp.secRol=sr )=0" )
-    List<SecRol> getNotRol();
+    @Query(nativeQuery = false, value = "select sp " +
+            "from SecPerfil sp" +
+            " where (select count(srp) from SecRolPerfil srp where srp.secPerfil=sp )=0" )
+    List<SecPerfil> getNotRol();
+
+
+    List<SecRolPerfil> findAllBy();
 
 
 

@@ -32,7 +32,7 @@ public class SecRolController {
     public ResponseRolPagination consultCompany (@RequestBody @Validated SearchDTO busqueda){ return secRolService.consultRol(busqueda);}
 
     @GetMapping("RolPerfil_NotPerfil")
-    public SecRolPerfilDTO getRolPerfil_NotPerfil (@RequestParam Long idPerfil){ return secRolPerfil.getRolPerfil_NotPerfil(idPerfil);}
+    public SecRolPerfilDTO getRolPerfil_NotPerfil (@RequestParam Long idRol){ return secRolPerfil.getRolPerfil_NotPerfil(idRol);}
 
 
     @PostMapping("insertDeleteRolPerfil")

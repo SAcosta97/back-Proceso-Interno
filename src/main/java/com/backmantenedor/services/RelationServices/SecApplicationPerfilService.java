@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SecApplicationPerfilService {
@@ -39,8 +40,8 @@ public class SecApplicationPerfilService {
 
         SecAppPerfilDTO secAppPerfilexit = new SecAppPerfilDTO();
       if(idApp != null){
-          List<SecApplications> lsPerfilApp = secApplicationPerfilRepository.getApp(idApp);
-          List<SecApplications> lsNotPerfilApp = secApplicationPerfilRepository.getNotApp();
+          List<SecPerfil> lsPerfilApp = secApplicationPerfilRepository.getApp(idApp);
+          List<SecPerfil> lsNotPerfilApp = secApplicationPerfilRepository.getNotApp();
 
           secAppPerfilexit.setPerfilApp(secApplicationPerfilMapper.toSecApplicationsToGetApplicationDTO(lsPerfilApp));
           secAppPerfilexit.setNotPerfilApp(secApplicationPerfilMapper.toSecApplicationsToGetApplicationDTO(lsNotPerfilApp));
@@ -55,20 +56,36 @@ public class SecApplicationPerfilService {
 
         SaveMantDTO exit= new SaveMantDTO();
 
-        if(entryAppPerfil.getFlagCreation()){
+        if(entryAppPerfil.getFlagCreation())
+        {
 
+            List<SecApplicationPerfil>  secApplicationPerfils=  secApplicationPerfilRepository.findAllBy();
+
+
+            SecApplications secApplications = secApplicationsRepository.findById(entryAppPerfil.getIdApp()).get();
+            SecApplicationPerfil secAppPerfil = new SecApplicationPerfil();
+            secAppPerfil.setSecApplications(secApplications);
             //insert
            for(Long st: entryAppPerfil.getPerfilApp()){
-               SecApplicationPerfil secAppPerfil = new SecApplicationPerfil();
-               SecApplications secApplications = secApplicationsRepository.findById(entryAppPerfil.getIdApp()).get();
-               secAppPerfil.setSecApplications(secApplications);
-               SecPerfil perfilObt=secPerfilRepository.findById(st).get();
 
+               List<SecApplicationPerfil>  secApplicationPerfilsS=secApplicationPerfils.stream().filter(x->(x.getSecApplications().getId().equals(entryAppPerfil.getIdApp()) && x.getSecPerfil().getId().equals(st))).collect(Collectors.toList());
+
+                   if(!secApplicationPerfilsS.isEmpty())
+               {
+                   exit.setMessage("Perfil ya tiene una App asignada");
+                   exit.setSuccess(false);
+
+               }
+                   else
+               {
+               SecPerfil perfilObt=secPerfilRepository.findById(st).get();
                secAppPerfil.setSecPerfil(perfilObt);
 
-               secApplicationPerfilRepository.save(secAppPerfil);
+                   secApplicationPerfilRepository.save(secAppPerfil);
 
-               exit.setMessage("Roles asignados");
+                   exit.setMessage("Perfiles asignados");
+                   exit.setSuccess(true);
+               }
            }
 
         }else{
@@ -86,7 +103,7 @@ public class SecApplicationPerfilService {
 
         }
 
-            exit.setMessage("Roles Eliminados");
+            exit.setMessage("Perfiles Eliminados");
         }
 
         return exit;

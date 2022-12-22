@@ -21,7 +21,6 @@ import java.util.List;
 public class SecApplicationsController {
 
 
-
     @Autowired
     private SecApplicationsService secApp;
 
@@ -36,7 +35,7 @@ public class SecApplicationsController {
     public SaveMantDTO saveUpdateApplications(@RequestBody @Validated SecApplicationsDTO App) throws Exception {
         return secApp.saveUpdateApplications(App);
     }
-
+    //PERFIL
     @PostMapping("insertDeleteAppPerfil")
     public SaveMantDTO insertDeleteAppPerfil(@RequestBody @Validated EntryAppPerfil entryAppPerfil ) throws Exception {
         return secAppPerfil.insertDeleteAppPerfil(entryAppPerfil);
@@ -45,6 +44,7 @@ public class SecApplicationsController {
     @GetMapping("perfilApp_NotPerfilApp")
     public SecAppPerfilDTO getPerfilApp_NotPerfilApp (@RequestParam Long idApp){ return secAppPerfil.getPerfilApp_NotPerfilApp(idApp);}
 
+    //User
     @PostMapping("insertDeleteAppUser")
     public SaveMantDTO insertDeleteAppUser(@RequestBody @Validated EntryAppUser entryAppUser ) throws Exception {
         return appUser.insertDeleteAppUser(entryAppUser);
@@ -59,7 +59,6 @@ public class SecApplicationsController {
 
     @GetMapping("/id")
     public List<SecApplicationsDTO> getId(@RequestParam long id){ return secApp.getIdApp(id);}
-
 
 
 }

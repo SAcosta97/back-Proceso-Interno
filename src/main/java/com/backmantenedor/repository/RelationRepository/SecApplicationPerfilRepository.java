@@ -3,6 +3,7 @@ package com.backmantenedor.repository.RelationRepository;
 
 import com.backmantenedor.entity.RelationEntity.SecApplicationPerfil;
 import com.backmantenedor.entity.SecApplications;
+import com.backmantenedor.entity.SecPerfil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,16 +21,19 @@ public interface SecApplicationPerfilRepository extends JpaRepository<SecApplica
     SecApplicationPerfil deleteId(@Param("idApplication") Long idApplication, @Param("idPerfil") Long idPerfil);
 
 
-    @Query(nativeQuery = false, value = "select sap.secApplications " +
+    @Query(nativeQuery = false, value = "select sap.secPerfil " +
             "from SecApplicationPerfil sap " +
-            "where sap.secPerfil.id=:idPerfil")
-    List<SecApplications> getApp(@Param("idPerfil") Long idPerfil );
+            "where sap.secApplications.id=:idApp")
+    List<SecPerfil> getApp(@Param("idApp") Long idApp );
 
 
-    @Query(nativeQuery = false, value = "select sa " +
-            "from SecApplications sa" +
-            " where (select count(sap) from SecApplicationPerfil sap where sap.secApplications=sa )=0" )
-    List<SecApplications> getNotApp();
+    @Query(nativeQuery = false, value = "select sp " +
+            "from SecPerfil sp" +
+            " where (select count(sap) from SecApplicationPerfil sap where sap.secPerfil=sp )=0" )
+    List<SecPerfil> getNotApp();
+
+
+    List<SecApplicationPerfil> findAllBy();
 
 
 

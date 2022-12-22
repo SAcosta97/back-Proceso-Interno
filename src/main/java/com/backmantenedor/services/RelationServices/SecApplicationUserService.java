@@ -1,37 +1,38 @@
 package com.backmantenedor.services.RelationServices;
 
-import com.backmantenedor.Util.EntryAppPerfil;
 import com.backmantenedor.Util.EntryAppUser;
 import com.backmantenedor.Util.Utility;
-import com.backmantenedor.entity.RelationEntity.SecApplicationPerfil;
+import com.backmantenedor.entity.RelationEntity.SecApplicationUser;
 import com.backmantenedor.entity.SecApplications;
-import com.backmantenedor.entity.SecPerfil;
-import com.backmantenedor.mapper.SecApplicationPerfilMapper;
-import com.backmantenedor.models.RelationModels.SecAppPerfilDTO;
+import com.backmantenedor.entity.UserEntity;
+import com.backmantenedor.mapper.SecAppUserMapper;
 import com.backmantenedor.models.RelationModels.SecAppUserDTO;
 import com.backmantenedor.models.SaveMantDTO;
-import com.backmantenedor.repository.RelationRepository.SecApplicationPerfilRepository;
+import com.backmantenedor.repository.RelationRepository.SecApplicationUserRepository;
 import com.backmantenedor.repository.SecApplicationsRepository;
-import com.backmantenedor.repository.SecPerfilRepository;
+import com.backmantenedor.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SecApplicationUserService {
 
     @Autowired
-    private SecApplicationPerfilRepository secApplicationPerfilRepository;
+    private SecApplicationUserRepository secApplicationUserRepository;
 
     @Autowired
-    private SecApplicationPerfilMapper secApplicationPerfilMapper;
+    private SecAppUserMapper secAppUserMapper;
 
     @Autowired
     private SecApplicationsRepository secApplicationsRepository;
 
     @Autowired
-    private SecPerfilRepository secPerfilRepository;
+    private UserEntityRepository userEntityRepository;
+
 
     @Autowired
     private Utility utility;
@@ -41,11 +42,11 @@ public class SecApplicationUserService {
 
         SecAppUserDTO secAppuserexit = new SecAppUserDTO();
       if(idApp != null){
-          List<SecApplications> lsUserApp = secApplicationPerfilRepository.getApp(idApp);
-          List<SecApplications> lsNotUserApp = secApplicationPerfilRepository.getNotApp();
+          List<UserEntity> lsUserApp = secApplicationUserRepository.getApp(idApp);
+          List<UserEntity> lsNotUserApp = secApplicationUserRepository.getNotApp();
 
-          secAppuserexit.setPerfilApp(secApplicationPerfilMapper.toSecApplicationsToGetApplicationDTO(lsUserApp));
-          secAppuserexit.setNotPerfilApp(secApplicationPerfilMapper.toSecApplicationsToGetApplicationDTO(lsNotUserApp));
+          secAppuserexit.setUserApp(secAppUserMapper.toUserEntityToUserEntityDTO(lsUserApp));
+          secAppuserexit.setNotUserApp(secAppUserMapper.toUserEntityToUserEntityDTO(lsNotUserApp));
 
       }
       return secAppuserexit;
@@ -59,36 +60,43 @@ public class SecApplicationUserService {
 
         if(entryAppUser.getFlagCreation()){
 
+            for(String st: entryAppUser.getUserApp()){
+            SecApplicationUser secApplicationUser = new SecApplicationUser();
+            SecApplications secApplications = secApplicationsRepository.findById(entryAppUser.getIdApp()).get();
+            secApplicationUser.setSecApplications(secApplications);
             //insert
-           for(Long st: entryAppUser.getUserApp()){
-               SecApplicationPerfil secAppPerfil = new SecApplicationPerfil();
-               SecApplications secApplications = secApplicationsRepository.findById(entryAppUser.getIdApp()).get();
-               secAppPerfil.setSecApplications(secApplications);
-               SecPerfil perfilObt=secPerfilRepository.findById(st).get();
+//                   List<SecApplicationUser> secApplicationUsersS=secApplicationUser.stream().filter(x->(x.getSecApplications().getId().equals(entryAppUser.getIdApp()) && x.().getId().equals(st))).collect(Collectors.toList());
+//               if(!secApplicationUsersS.isEmpty())
+//               {
+//                   exit.setMessage("Perfil ya tiene una App asignada");
+//                   exit.setSuccess(false);
 
-               secAppPerfil.setSecPerfil(perfilObt);
+               /*} else{*/
+                   UserEntity userObt=userEntityRepository.findById(st).get();
 
-               secApplicationPerfilRepository.save(secAppPerfil);
+                   secApplicationUser.setUserEntity(userObt);
 
-               exit.setMessage("Roles asignados");
-           }
+               secApplicationUserRepository.save(secApplicationUser);
+
+               exit.setMessage("Usuarios asignados");
+                   }
 
         }else{
         //DELETE
-        for(Long st: entryAppUser.getUserApp()) {
+        for(String st: entryAppUser.getUserApp()) {
 
-            SecApplicationPerfil secAppPerfil = new SecApplicationPerfil();
-            secAppPerfil =secApplicationPerfilRepository.deleteId(entryAppUser.getIdApp(), st);
+            SecApplicationUser secAppUser = new SecApplicationUser();
+            secAppUser =secApplicationUserRepository.deleteId(entryAppUser.getIdApp(), st);
 
 
-            if(secAppPerfil != null){
+            if(secAppUser != null){
 
-              secApplicationPerfilRepository.delete(secAppPerfil);
+              secApplicationUserRepository.delete(secAppUser);
             }
 
         }
 
-            exit.setMessage("Roles Eliminados");
+            exit.setMessage("Ususarios Eliminados");
         }
 
         return exit;

@@ -6,7 +6,7 @@ public class EntryAppUser {
 
     private Boolean flagCreation;
 
-    private List<Long> userApp;
+    private List<String> userApp;
 
     private Long idApp;
 
@@ -18,11 +18,11 @@ public class EntryAppUser {
         this.flagCreation = flagCreation;
     }
 
-    public List<Long> getUserApp() {
+    public List<String> getUserApp() {
         return userApp;
     }
 
-    public void setUserApp(List<Long> userApp) {
+    public void setUserApp(List<String> userApp) {
         this.userApp = userApp;
     }
 

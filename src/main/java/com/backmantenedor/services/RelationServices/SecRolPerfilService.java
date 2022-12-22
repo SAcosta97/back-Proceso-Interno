@@ -33,12 +33,12 @@ public class SecRolPerfilService {
     private Utility utility;
 
 
-    public SecRolPerfilDTO getRolPerfil_NotPerfil(Long idPerfil) {
+    public SecRolPerfilDTO getRolPerfil_NotPerfil(Long idRol) {
 
         SecRolPerfilDTO secRolPerfilexit = new SecRolPerfilDTO();
-      if(idPerfil != null){
-          List<SecRol> lsRolPerfil = secRolPerfilRepository.getRol(idPerfil);
-          List<SecRol> lsRolNotPerfil = secRolPerfilRepository.getNotRol();
+      if(idRol != null){
+          List<SecPerfil> lsRolPerfil = secRolPerfilRepository.getRol(idRol);
+          List<SecPerfil> lsRolNotPerfil = secRolPerfilRepository.getNotRol();
 
           secRolPerfilexit.setRolPerfil(secRolPerfilMapper.toSecRolToUserGetRolDTO(lsRolPerfil));
           secRolPerfilexit.setRolNotPerfil(secRolPerfilMapper.toSecRolToUserGetRolDTO(lsRolNotPerfil));
@@ -54,19 +54,24 @@ public class SecRolPerfilService {
         SaveMantDTO exit= new SaveMantDTO();
 
         if(entryRolPerfil.getFlagCreation()){
-
             //insert
            for(Long st: entryRolPerfil.getRolPerfil()){
                SecRolPerfil secRolPerfil = new SecRolPerfil();
                SecRol secRol = secRolRepository.findById(entryRolPerfil.getIdRol()).get();
                secRolPerfil.setSecRol(secRol);
-               SecPerfil perfilObt=secPerfilRepository.findById(st).get();
+               if( secRol == secRolPerfil.getSecRol()){
+                   exit.setMessage("Este perfil ya tiene un rol asignado");
 
-               secRolPerfil.setSecPerfil(perfilObt);
+               } else{
+                   SecPerfil perfilObt=secPerfilRepository.findById(st).get();
 
-               secRolPerfilRepository.save(secRolPerfil);
+                   secRolPerfil.setSecPerfil(perfilObt);
 
-               exit.setMessage("Roles asignados");
+                   secRolPerfilRepository.save(secRolPerfil);
+
+                   exit.setMessage("Roles asignados");
+               }
+
            }
 
         }else{

@@ -1,6 +1,6 @@
 package com.backmantenedor.mapper;
 
-import com.backmantenedor.entity.SecRol;
+import com.backmantenedor.entity.SecPerfil;
 import com.backmantenedor.Util.GetRolDTO;
 import org.mapstruct.Mapper;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public interface SecRolPerfilMapper {
 
 
-    List<GetRolDTO> toSecRolToUserGetRolDTO(List<SecRol> id);
+    List<GetRolDTO> toSecRolToUserGetRolDTO(List<SecPerfil> id);
 
 
 

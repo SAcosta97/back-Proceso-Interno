@@ -4,8 +4,8 @@ public class GetApplicationDTO {
 
 
     private Long id;
-    private String App;
-    private String observation;
+    private String nombrePerfil;
+    private String observa;
 
 
     public Long getId() {
@@ -16,19 +16,19 @@ public class GetApplicationDTO {
         this.id = id;
     }
 
-    public String getApp() {
-        return App;
+    public String getNombrePerfil() {
+        return nombrePerfil;
     }
 
-    public void setApp(String app) {
-        App = app;
+    public void setNombrePerfil(String nombrePerfil) {
+        this.nombrePerfil = nombrePerfil;
     }
 
-    public String getObservation() {
-        return observation;
+    public String getObserva() {
+        return observa;
     }
 
-    public void setObservation(String observation) {
-        this.observation = observation;
+    public void setObserva(String observa) {
+        this.observa = observa;
     }
 }

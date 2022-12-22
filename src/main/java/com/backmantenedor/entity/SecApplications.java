@@ -1,9 +1,13 @@
 package com.backmantenedor.entity;
 
+import com.backmantenedor.entity.RelationEntity.SecApplicationPerfil;
+import com.backmantenedor.entity.RelationEntity.SecUserCompany;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name ="sec_applications", schema = "public")
@@ -38,6 +42,10 @@ public class SecApplications {
 
     @Column(name =  "user_update")
     private  String userUpdate;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secApplications")
+//    @org.springframework.lang.Nullable
+    private Set<SecApplicationPerfil>  appPerfil = new HashSet<>();
 
 
 
@@ -112,6 +120,14 @@ public class SecApplications {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<SecApplicationPerfil> getAppPerfil() {
+        return appPerfil;
+    }
+
+    public void setAppPerfil(Set<SecApplicationPerfil> appPerfil) {
+        this.appPerfil = appPerfil;
     }
 }
 

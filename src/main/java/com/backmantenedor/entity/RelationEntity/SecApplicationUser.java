@@ -1,7 +1,6 @@
 package com.backmantenedor.entity.RelationEntity;
 
 import com.backmantenedor.entity.SecApplications;
-import com.backmantenedor.entity.SecPerfil;
 import com.backmantenedor.entity.UserEntity;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
@@ -21,7 +20,7 @@ public class SecApplicationUser {
     private Long id;
 
     @Column(name = "status")
-    private String status;
+    private Boolean status;
 
     @Column(name = "date_registration")
     private Date dateRegistr;
@@ -50,11 +49,11 @@ public class SecApplicationUser {
         this.id = id;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
