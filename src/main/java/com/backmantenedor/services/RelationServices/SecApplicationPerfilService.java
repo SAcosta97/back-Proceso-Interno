@@ -60,8 +60,6 @@ public class SecApplicationPerfilService {
         {
 
             List<SecApplicationPerfil>  secApplicationPerfils=  secApplicationPerfilRepository.findAllBy();
-
-
             SecApplications secApplications = secApplicationsRepository.findById(entryAppPerfil.getIdApp()).get();
             SecApplicationPerfil secAppPerfil = new SecApplicationPerfil();
             secAppPerfil.setSecApplications(secApplications);
@@ -74,15 +72,12 @@ public class SecApplicationPerfilService {
                {
                    exit.setMessage("Perfil ya tiene una App asignada");
                    exit.setSuccess(false);
-
                }
                    else
                {
                SecPerfil perfilObt=secPerfilRepository.findById(st).get();
                secAppPerfil.setSecPerfil(perfilObt);
-
                    secApplicationPerfilRepository.save(secAppPerfil);
-
                    exit.setMessage("Perfiles asignados");
                    exit.setSuccess(true);
                }
@@ -94,8 +89,6 @@ public class SecApplicationPerfilService {
 
             SecApplicationPerfil secAppPerfil = new SecApplicationPerfil();
             secAppPerfil =secApplicationPerfilRepository.deleteId(entryAppPerfil.getIdApp(), st);
-
-
             if(secAppPerfil != null){
 
               secApplicationPerfilRepository.delete(secAppPerfil);

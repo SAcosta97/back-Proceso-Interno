@@ -19,13 +19,12 @@ public interface SecUserPerfilRepository extends JpaRepository<SecUserPerfil, Lo
             " from SecUserPerfil sup" +
             " where sup.userEntity.id =:iduser" +
             " and sup.secPerfil.id =:idPerfil")
-    SecUserPerfil deleteId(@Param("idApplication") Long idPerfil, @Param("idPerfil") String idUser);
-
+    SecUserPerfil deleteId(@Param("idPerfil") Long idPerfil, @Param("iduser") String idUser);
 
     @Query(nativeQuery = false, value = "select sup.secPerfil " +
             "from SecUserPerfil sup " +
             "where sup.secPerfil.id=:idPerfil")
-    List<UserEntity> getApp(@Param("idApp") Long idPerfil );
+    List<UserEntity> getApp(@Param("idPerfil") Long idPerfil );
 
 
     @Query(nativeQuery = false, value = "select ue " +
@@ -34,7 +33,7 @@ public interface SecUserPerfilRepository extends JpaRepository<SecUserPerfil, Lo
     List<UserEntity> getNotApp();
 
 
-    List<SecUserPerfilRepository> findAllBy();
+    List<SecUserPerfil> findAllBy();
 
 
 

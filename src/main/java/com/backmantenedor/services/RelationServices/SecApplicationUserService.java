@@ -2,6 +2,7 @@ package com.backmantenedor.services.RelationServices;
 
 import com.backmantenedor.Util.EntryAppUser;
 import com.backmantenedor.Util.Utility;
+import com.backmantenedor.entity.RelationEntity.SecApplicationPerfil;
 import com.backmantenedor.entity.RelationEntity.SecApplicationUser;
 import com.backmantenedor.entity.SecApplications;
 import com.backmantenedor.entity.UserEntity;
@@ -60,27 +61,30 @@ public class SecApplicationUserService {
 
         if(entryAppUser.getFlagCreation()){
 
-            for(String st: entryAppUser.getUserApp()){
-            SecApplicationUser secApplicationUser = new SecApplicationUser();
+            List<SecApplicationUser> secApplicationUsers= secApplicationUserRepository.findAllBy();
             SecApplications secApplications = secApplicationsRepository.findById(entryAppUser.getIdApp()).get();
+            SecApplicationUser secApplicationUser = new SecApplicationUser();
             secApplicationUser.setSecApplications(secApplications);
-            //insert
-//                   List<SecApplicationUser> secApplicationUsersS=secApplicationUser.stream().filter(x->(x.getSecApplications().getId().equals(entryAppUser.getIdApp()) && x.().getId().equals(st))).collect(Collectors.toList());
-//               if(!secApplicationUsersS.isEmpty())
-//               {
-//                   exit.setMessage("Perfil ya tiene una App asignada");
-//                   exit.setSuccess(false);
 
-               /*} else{*/
-                   UserEntity userObt=userEntityRepository.findById(st).get();
+//insert
+            for(String st: entryAppUser.getUserApp()) {
 
-                   secApplicationUser.setUserEntity(userObt);
+                List<SecApplicationUser>  secApplicationUsersS=secApplicationUsers.stream().filter(x->(x.getSecApplications().getId().equals(entryAppUser.getIdApp()) && x.getUserEntity().getId().equals(st))).collect(Collectors.toList());
 
-               secApplicationUserRepository.save(secApplicationUser);
 
-               exit.setMessage("Usuarios asignados");
-                   }
+                if (!secApplicationUsersS.isEmpty()) {
+                    exit.setMessage( "Usuario ya tiene una App asignada");
+                    exit.setSuccess(false);
 
+                    } else{
+                    UserEntity userObt = userEntityRepository.findById(st).get();
+                    secApplicationUser.setUserEntity(userObt);
+                    secApplicationUserRepository.save(secApplicationUser);
+
+                    exit.setMessage("Usuario asignados");
+                    exit.setSuccess(true);
+                }
+            }
         }else{
         //DELETE
         for(String st: entryAppUser.getUserApp()) {

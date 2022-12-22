@@ -34,6 +34,8 @@ public interface SecUserCompanyRepository extends JpaRepository<SecUserCompany, 
             " and uenty.email is not null")
     List<UserEntity> getUsersNotCompany();
 
+    List<SecUserCompany> findAllBy();
+
 
 
 }

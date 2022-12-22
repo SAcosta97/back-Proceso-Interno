@@ -36,7 +36,7 @@ public interface SecApplicationUserRepository extends JpaRepository<SecApplicati
             " and uenty.email is not null")
     List<UserEntity> getNotApp();
 
-//    List<SecApplicationUser>findAllBy();
+    List<SecApplicationUser>findAllBy();
 
 
 

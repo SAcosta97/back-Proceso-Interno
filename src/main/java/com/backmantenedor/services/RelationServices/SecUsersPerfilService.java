@@ -66,49 +66,47 @@ public class SecUsersPerfilService {
 
         SaveMantDTO exit= new SaveMantDTO();
 
-        if(entryUserPerfil.getFlagCreation())
-        {
+        if(entryUserPerfil.getFlagCreation()) {
+
+            List<SecUserPerfil> secUserPerfils = secUserPerfilRepository.findAllBy();
+            SecPerfil secPerfil = secPerfilRepository.findById(entryUserPerfil.getIdPerfil()).get();
+            SecUserPerfil secUserPerfil = new SecUserPerfil();
+            secUserPerfil.setSecPerfil(secPerfil);
+
+
             //insert
-           for(String st: entryUserPerfil.getUsersperfil()){
-               SecUserPerfil secUserPerfil = new SecUserPerfil();
-               SecPerfil secPerfil = secPerfilRepository.findById(entryUserPerfil.getIdPerfil()).get();
-               SecUserPerfil userPerfil = new SecUserPerfil();
-               userPerfil.setSecPerfil(secPerfil);
-//               List<SecUserPerfil>  secUserPerfilS=secPerfil.stream().filter(x->(x.getSecApplications().getId().equals(entryAppPerfil.getIdApp()) && x.getSecPerfil().getId().equals(st))).collect(Collectors.toList());
+            for (String st : entryUserPerfil.getUsersperfil()) {
 
-//                   if(!secApplicationPerfilsS.isEmpty())
-//               {
-//                   exit.setMessage("Perfil ya tiene una App asignada");
-//                   exit.setSuccess(false);
+                List<SecUserPerfil> secUserPerfilS = secUserPerfils.stream().filter(x -> (x.getSecPerfil().getId().equals(entryUserPerfil.getIdPerfil()) && x.getUserEntity().getId().equals(st))).collect(Collectors.toList());
 
-               UserEntity userObt=userEntityRepository.findById(st).get();
-               secUserPerfil.setUserEntity(userObt);
+                if (!secUserPerfilS.isEmpty()) {
+                    exit.setMessage("Usuario ya tiene una App asignada");
+                    exit.setSuccess(false);
+                } else {
 
-                   secUserPerfilRepository.save(secUserPerfil);
-
-                   exit.setMessage("Usuarios asignados");
-                   exit.setSuccess(true);
-               }
+                    UserEntity userObt = userEntityRepository.findById(st).get();
+                    secUserPerfil.setUserEntity(userObt);
+                    secUserPerfilRepository.save(secUserPerfil);
+                    exit.setMessage("Usuarios asignados");
+                    exit.setSuccess(true);
+                }
 
 
-        }else{
+            }
+        }  else
+           {
         //DELETE
         for(String st: entryUserPerfil.getUsersperfil()) {
 
             SecUserPerfil secUserPerfil = new SecUserPerfil();
             secUserPerfil =secUserPerfilRepository.deleteId(entryUserPerfil.getIdPerfil(), st);
-
-
             if(secUserPerfil != null){
 
               secUserPerfilRepository.delete(secUserPerfil);
             }
-
         }
-
             exit.setMessage("Usuarios Eliminados");
         }
-
         return exit;
     }
 
