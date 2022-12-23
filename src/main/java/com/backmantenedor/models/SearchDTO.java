@@ -23,7 +23,6 @@ public class SearchDTO {
     private String rol;
 
     //Option
-
     private Boolean permit;
 
     //option-Api

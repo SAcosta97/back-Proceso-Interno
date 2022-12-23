@@ -1,10 +1,12 @@
 package com.backmantenedor.services;
 
+import com.backmantenedor.entity.ApiRoute;
 import com.backmantenedor.entity.SecOption;
 import com.backmantenedor.mapper.MasterTypeElementsMapper;
 import com.backmantenedor.mapper.SecOptionMapper;
 import com.backmantenedor.models.*;
 import com.backmantenedor.models.Response.ResponseSecOptionPagination;
+import com.backmantenedor.repository.ApirouteRepository;
 import com.backmantenedor.repository.MasterTypeElementsRepository;
 import com.backmantenedor.repository.SecOptionRepository;
 import com.backmantenedor.repository.SecResourcePerfilRepository;
@@ -27,21 +29,24 @@ public class SecOptionService {
     @Autowired
     private SecOptionRepository secOptionRepository;
 
+    @Autowired
+    private ApirouteRepository apirouteRepository;
 
-    public SaveMantDTO saveOption (SearchDTO searchDTO) throws Exception{
+
+    public SaveMantDTO saveOption (SecOptionDTO secOptionDTO) throws Exception{
 
         SaveMantDTO exit = new SaveMantDTO();
         try{
 //
                 //crear
                 SecOption secOption = new SecOption();
-                SecOptionDTO secOptionDTO = new SecOptionDTO();
-                if(secOption.getId()!=null){
+                if(secOptionDTO.getId()!=null){
                     secOption.setId(secOptionDTO.getId());
                     secOption.setUserUpdate(secOptionDTO.getUserUpdate());
                 }
-                searchDTO.setIdApi(secOptionDTO.getIdApi());
-                secOption.setIdEvento(secOption.getIdEvento());
+            ApiRoute api = apirouteRepository.findById(secOptionDTO.getIdApi()).get();
+                secOption.setApiRoute(api);
+                secOption.setIdEvento(secOptionDTO.getIdEvento());
                 secOption.setStatus("A");
                 secOption.setPermit(secOptionDTO.getPermit());
                 secOption.setUserCreation(secOptionDTO.getUserCreation());
@@ -86,7 +91,6 @@ public class SecOptionService {
 
 
     public List<SecOptionDTO> getOptionGeneral(SearchDTO busqueda){
-
 
 
             return secOptionMapper.secOptionLsToSecOptionDTO(secOptionRepository.getOptionSinPag(busqueda.getPermit()));

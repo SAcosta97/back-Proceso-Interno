@@ -5,9 +5,8 @@ public class SecOptionDTO {
 
     private Long id;
 
-    private String status;
 
-    private String idEvvento;
+    private String idEvento;
 
     private Boolean permit;
 
@@ -18,6 +17,7 @@ public class SecOptionDTO {
     private String userUpdate;
 
 
+
     public Long getId() {
         return id;
     }
@@ -26,20 +26,13 @@ public class SecOptionDTO {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
+
+    public String getIdEvento() {
+        return idEvento;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getIdEvvento() {
-        return idEvvento;
-    }
-
-    public void setIdEvvento(String idEvvento) {
-        this.idEvvento = idEvvento;
+    public void setIdEvento(String idEvento) {
+        this.idEvento = idEvento;
     }
 
     public Boolean getPermit() {
@@ -65,6 +58,7 @@ public class SecOptionDTO {
     public void setUserUpdate(String userUpdate) {
         this.userUpdate = userUpdate;
     }
+
 
     public Long getIdApi() {
         return idApi;

@@ -54,8 +54,6 @@ public class SecResourcePerfilOption {
         this.status = status;
     }
 
-
-
     public SecOption getSecOption() {
         return secOption;
     }

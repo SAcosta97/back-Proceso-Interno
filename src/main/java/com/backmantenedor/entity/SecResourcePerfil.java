@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name ="se_resource_perfil", schema = "public")
+@Table(name ="sec_resource_perfil", schema = "public")
 public class SecResourcePerfil {
 
     @Id
