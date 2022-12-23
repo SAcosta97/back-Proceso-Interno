@@ -63,8 +63,7 @@ public class SecApplicationUserService {
 
             List<SecApplicationUser> secApplicationUsers= secApplicationUserRepository.findAllBy();
             SecApplications secApplications = secApplicationsRepository.findById(entryAppUser.getIdApp()).get();
-            SecApplicationUser secApplicationUser = new SecApplicationUser();
-            secApplicationUser.setSecApplications(secApplications);
+
 
 //insert
             for(String st: entryAppUser.getUserApp()) {
@@ -78,6 +77,8 @@ public class SecApplicationUserService {
 
                     } else{
                     UserEntity userObt = userEntityRepository.findById(st).get();
+                    SecApplicationUser secApplicationUser = new SecApplicationUser();
+                    secApplicationUser.setSecApplications(secApplications);
                     secApplicationUser.setUserEntity(userObt);
                     secApplicationUserRepository.save(secApplicationUser);
 

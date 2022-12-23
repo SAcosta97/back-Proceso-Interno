@@ -1,9 +1,12 @@
 package com.backmantenedor.entity;
 
 
+import com.backmantenedor.entity.RelationEntity.SecResourcePerfilOption;
+import com.backmantenedor.entity.RelationEntity.SecUserPerfil;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name ="api_route", schema = "public")
@@ -41,6 +44,12 @@ public class ApiRoute {
 
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "apiRoute")
+    private List<SecResourcePerfil> secResourcePerfils;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "apiRoute")
+    private List<SecResourcePerfilOption> secResourcePerfilOptions;
 
     public Long getId() {
         return id;
@@ -120,5 +129,21 @@ public class ApiRoute {
 
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public List<SecResourcePerfil> getSecResourcePerfils() {
+        return secResourcePerfils;
+    }
+
+    public void setSecResourcePerfils(List<SecResourcePerfil> secResourcePerfils) {
+        this.secResourcePerfils = secResourcePerfils;
+    }
+
+    public List<SecResourcePerfilOption> getSecResourcePerfilOptions() {
+        return secResourcePerfilOptions;
+    }
+
+    public void setSecResourcePerfilOptions(List<SecResourcePerfilOption> secResourcePerfilOptions) {
+        this.secResourcePerfilOptions = secResourcePerfilOptions;
     }
 }

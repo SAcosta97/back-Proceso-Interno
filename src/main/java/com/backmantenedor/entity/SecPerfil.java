@@ -1,6 +1,7 @@
 package com.backmantenedor.entity;
 
 import com.backmantenedor.entity.RelationEntity.SecRolPerfil;
+import com.backmantenedor.entity.RelationEntity.SecUserPerfil;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;
@@ -43,6 +44,12 @@ public class SecPerfil {
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secPerfil")
     private List<SecRolPerfil> secPerfil;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secPerfil")
+    private List<SecUserPerfil> secUserPerfils;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secPerfil")
+    private List<SecResourcePerfil> secResourcePerfils;
 
 
     public Long getId() {
@@ -123,6 +130,14 @@ public class SecPerfil {
 
     public void setSecPerfil(List<SecRolPerfil> secPerfil) {
         this.secPerfil = secPerfil;
+    }
+
+    public List<SecUserPerfil> getSecUserPerfils() {
+        return secUserPerfils;
+    }
+
+    public void setSecUserPerfils(List<SecUserPerfil> secUserPerfils) {
+        this.secUserPerfils = secUserPerfils;
     }
 }
 

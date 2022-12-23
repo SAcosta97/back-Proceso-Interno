@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name ="sec_user_perfil", schema = "public")
+@Table(name ="sec_users_perfil", schema = "public")
 public class SecUserPerfil {
 
 
@@ -24,7 +24,7 @@ public class SecUserPerfil {
     private String status;
 
     @Column(name = "reference")
-    private String reference;
+    private Long reference;
 
     @Column(name = "audit")
     private String audit;
@@ -67,11 +67,11 @@ public class SecUserPerfil {
         this.status = status;
     }
 
-    public String getReference() {
+    public Long getReference() {
         return reference;
     }
 
-    public void setReference(String reference) {
+    public void setReference(Long reference) {
         this.reference = reference;
     }
 
@@ -130,4 +130,7 @@ public class SecUserPerfil {
     public String getAudit() {
         return audit;
     }
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.backmantenedor.entity;
 
-import com.backmantenedor.entity.RelationEntity.SecUserCompany;
+import com.backmantenedor.entity.RelationEntity.SecApplicationPerfil;
+import com.backmantenedor.entity.RelationEntity.SecResourcePerfilOption;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import javax.persistence.*;
@@ -9,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name ="sec_company", schema = "public")
-public class SecCompany {
+@Table(name ="se_resource_perfil", schema = "public")
+public class SecResourcePerfil {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -18,29 +19,29 @@ public class SecCompany {
     @Nullable
     private Long id;
 
-    @Column(name = "business_name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "ruc")
-    private String ruc;
-
     @Column(name = "status")
-    private Boolean status;
+    private String status;
 
-    @Column(name = "observation")
-    private String observation;
-
-//    @Column(name = "reference")
-//    private String reference;
+    @Column(name = "reference")
+    private String reference;
 
     @Column(name = "audit")
     private String audit;
 
-    @Column(name = "date_registration")
+    @Column(name = "date_registr")
     private Date dateRegistr;
 
     @Column(name = "date_update")
     private Date dateUpdate;
+
+    @Column(name = "observation")
+    private String observation;
+
+    @Column(name = "path")
+    private String path;
 
     @Column(name = "user_creation")
     private  String userCreation;
@@ -48,9 +49,29 @@ public class SecCompany {
     @Column(name =  "user_update")
     private  String userUpdate;
 
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secCompany")
+    //Relacion muchos a uno
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_perfil")
+    private SecPerfil secPerfil ;
+
+    //Relacion muchos a uno
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "_id_api_route")
+    private ApiRoute apiRoute ;
+
+    //Relacion muchos a uno
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_application")
+    private SecApplications secApplications ;
+
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secResourcePerfil")
 //    @org.springframework.lang.Nullable
-    private Set<SecUserCompany> secCompany = new HashSet<>();
+    private Set<SecResourcePerfilOption>  secResourcePerfilOptions = new HashSet<>();
+
+
+
+
+
 
     public Long getId() {
         return id;
@@ -59,6 +80,7 @@ public class SecCompany {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getAudit() {
         return audit;
@@ -108,20 +130,20 @@ public class SecCompany {
         this.name = name;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getRuc() {
-        return ruc;
+    public String getReference() {
+        return reference;
     }
 
-    public void setRuc(String ruc) {
-        this.ruc = ruc;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public String getObservation() {
@@ -132,22 +154,38 @@ public class SecCompany {
         this.observation = observation;
     }
 
-    public Set<SecUserCompany> getSecCompany() {
-        return secCompany;
+    public String getPath() {
+        return path;
     }
 
-    public void setSecCompany(Set<SecUserCompany> secCompany) {
-        this.secCompany = secCompany;
+    public void setPath(String path) {
+        this.path = path;
     }
 
 
-    //    public String getReference() {
-//        return reference;
-//    }
-//
-//    public void setReference(String reference) {
-//        this.reference = reference;
-//    }
+    public SecPerfil getSecPerfil() {
+        return secPerfil;
+    }
+
+    public void setSecPerfil(SecPerfil secPerfil) {
+        this.secPerfil = secPerfil;
+    }
+
+    public ApiRoute getApiRoute() {
+        return apiRoute;
+    }
+
+    public void setApiRoute(ApiRoute apiRoute) {
+        this.apiRoute = apiRoute;
+    }
+
+    public SecApplications getSecApplications() {
+        return secApplications;
+    }
+
+    public void setSecApplications(SecApplications secApplications) {
+        this.secApplications = secApplications;
+    }
 }
 
 

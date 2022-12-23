@@ -31,6 +31,5 @@ public interface SecPerfilRepository extends JpaRepository<SecPerfil, Long> {
             + " order by perf.id desc ")
     List<SecPerfil> getPerfilSinPag(@Param("nombrePerfil") String nombrePerfil);
 
-    List<SecPer>
 
 }

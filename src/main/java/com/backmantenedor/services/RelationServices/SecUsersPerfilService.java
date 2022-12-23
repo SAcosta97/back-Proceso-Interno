@@ -70,22 +70,23 @@ public class SecUsersPerfilService {
 
             List<SecUserPerfil> secUserPerfils = secUserPerfilRepository.findAllBy();
             SecPerfil secPerfil = secPerfilRepository.findById(entryUserPerfil.getIdPerfil()).get();
-            SecUserPerfil secUserPerfil = new SecUserPerfil();
-            secUserPerfil.setSecPerfil(secPerfil);
 
 
             //insert
             for (String st : entryUserPerfil.getUsersperfil()) {
 
-                List<SecUserPerfil> secUserPerfilS = secUserPerfils.stream().filter(x -> (x.getSecPerfil().getId().equals(entryUserPerfil.getIdPerfil()) && x.getUserEntity().getId().equals(st))).collect(Collectors.toList());
-
-                if (!secUserPerfilS.isEmpty()) {
+//                List<SecUserPerfil> secUserPerfilS = secUserPerfils.stream().filter(x -> (x.getSecPerfil().getId().equals(entryUserPerfil.getIdPerfil()) && x.getUserEntity().getId().equals(st))).collect(Collectors.toList());
+                Long relation = secUserPerfilRepository.getcnatityId(entryUserPerfil.getIdPerfil(), st);
+                if (relation > 0 ) {
                     exit.setMessage("Usuario ya tiene una App asignada");
                     exit.setSuccess(false);
                 } else {
 
                     UserEntity userObt = userEntityRepository.findById(st).get();
+                    SecUserPerfil secUserPerfil = new SecUserPerfil();
+                    secUserPerfil.setSecPerfil(secPerfil);
                     secUserPerfil.setUserEntity(userObt);
+                    secUserPerfil.setStatus("A");
                     secUserPerfilRepository.save(secUserPerfil);
                     exit.setMessage("Usuarios asignados");
                     exit.setSuccess(true);

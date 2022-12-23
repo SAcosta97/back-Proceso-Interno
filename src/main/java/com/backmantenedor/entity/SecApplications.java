@@ -47,6 +47,9 @@ public class SecApplications {
 //    @org.springframework.lang.Nullable
     private Set<SecApplicationPerfil>  appPerfil = new HashSet<>();
 
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secApplications")
+//    @org.springframework.lang.Nullable
+    private Set<SecResourcePerfil>  secResourcePerfils = new HashSet<>();
 
 
     public Long getId() {
@@ -128,6 +131,14 @@ public class SecApplications {
 
     public void setAppPerfil(Set<SecApplicationPerfil> appPerfil) {
         this.appPerfil = appPerfil;
+    }
+
+    public Set<SecResourcePerfil> getSecResourcePerfils() {
+        return secResourcePerfils;
+    }
+
+    public void setSecResourcePerfils(Set<SecResourcePerfil> secResourcePerfils) {
+        this.secResourcePerfils = secResourcePerfils;
     }
 }
 

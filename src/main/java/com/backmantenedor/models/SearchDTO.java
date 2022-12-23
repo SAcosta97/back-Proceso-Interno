@@ -22,6 +22,10 @@ public class SearchDTO {
     //Rol
     private String rol;
 
+    //Option
+
+    private Boolean permit;
+
 
     public int getPage() {
         return page;
@@ -87,5 +91,11 @@ public class SearchDTO {
         this.rol = rol;
     }
 
+    public Boolean getPermit() {
+        return permit;
+    }
 
+    public void setPermit(Boolean permit) {
+        this.permit = permit;
+    }
 }
