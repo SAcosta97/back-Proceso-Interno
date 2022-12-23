@@ -26,6 +26,9 @@ public class SearchDTO {
 
     private Boolean permit;
 
+    //option-Api
+    private long idApi;
+
 
     public int getPage() {
         return page;
@@ -97,5 +100,13 @@ public class SearchDTO {
 
     public void setPermit(Boolean permit) {
         this.permit = permit;
+    }
+
+    public long getIdApi() {
+        return idApi;
+    }
+
+    public void setIdApi(long idApi) {
+        this.idApi = idApi;
     }
 }

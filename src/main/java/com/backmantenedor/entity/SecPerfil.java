@@ -139,6 +139,14 @@ public class SecPerfil {
     public void setSecUserPerfils(List<SecUserPerfil> secUserPerfils) {
         this.secUserPerfils = secUserPerfils;
     }
+
+    public List<SecResourcePerfil> getSecResourcePerfils() {
+        return secResourcePerfils;
+    }
+
+    public void setSecResourcePerfils(List<SecResourcePerfil> secResourcePerfils) {
+        this.secResourcePerfils = secResourcePerfils;
+    }
 }
 
 

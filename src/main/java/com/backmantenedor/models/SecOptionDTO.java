@@ -11,6 +11,8 @@ public class SecOptionDTO {
 
     private Boolean permit;
 
+    private Long idApi;
+
     private String userCreation;
 
     private String userUpdate;
@@ -62,5 +64,13 @@ public class SecOptionDTO {
 
     public void setUserUpdate(String userUpdate) {
         this.userUpdate = userUpdate;
+    }
+
+    public Long getIdApi() {
+        return idApi;
+    }
+
+    public void setIdApi(Long idApi) {
+        this.idApi = idApi;
     }
 }

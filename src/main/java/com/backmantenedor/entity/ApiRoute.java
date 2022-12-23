@@ -51,6 +51,10 @@ public class ApiRoute {
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "apiRoute")
     private List<SecResourcePerfilOption> secResourcePerfilOptions;
 
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "apiRoute")
+    private List<SecOption> secOptions;
+
+
     public Long getId() {
         return id;
     }
@@ -145,5 +149,13 @@ public class ApiRoute {
 
     public void setSecResourcePerfilOptions(List<SecResourcePerfilOption> secResourcePerfilOptions) {
         this.secResourcePerfilOptions = secResourcePerfilOptions;
+    }
+
+    public List<SecOption> getSecOptions() {
+        return secOptions;
+    }
+
+    public void setSecOptions(List<SecOption> secOptions) {
+        this.secOptions = secOptions;
     }
 }

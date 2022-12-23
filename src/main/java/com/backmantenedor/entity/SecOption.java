@@ -39,6 +39,11 @@ public class SecOption {
 //    @org.springframework.lang.Nullable
     private Set<SecResourcePerfilOption> secResourcePerfilOptions = new HashSet<>();
 
+    //Relacion muchos a uno
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_api_route")
+    private ApiRoute apiRoute ;
+
     public Long getId() {
         return id;
     }
@@ -87,4 +92,19 @@ public class SecOption {
         this.userUpdate = userUpdate;
     }
 
+    public Set<SecResourcePerfilOption> getSecResourcePerfilOptions() {
+        return secResourcePerfilOptions;
+    }
+
+    public void setSecResourcePerfilOptions(Set<SecResourcePerfilOption> secResourcePerfilOptions) {
+        this.secResourcePerfilOptions = secResourcePerfilOptions;
+    }
+
+    public ApiRoute getApiRoute() {
+        return apiRoute;
+    }
+
+    public void setApiRoute(ApiRoute apiRoute) {
+        this.apiRoute = apiRoute;
+    }
 }

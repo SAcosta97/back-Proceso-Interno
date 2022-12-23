@@ -23,30 +23,24 @@ public class SecOptionService {
     @Autowired
     private SecOptionMapper secOptionMapper;
 
-    @Autowired
-    private SecResourcePerfilRepository secResourcePerfilRepository;
-
-    @Autowired
-    private MasterTypeElementsMapper masterTypeElementsMapper;
-
-    @Autowired
-    private MasterTypeElementsRepository masterTypeElementsRepository;
 
     @Autowired
     private SecOptionRepository secOptionRepository;
 
 
-    public SaveMantDTO saveOption (SecOptionDTO secOptionDTO) throws Exception{
+    public SaveMantDTO saveOption (SearchDTO searchDTO) throws Exception{
 
         SaveMantDTO exit = new SaveMantDTO();
         try{
 //
                 //crear
                 SecOption secOption = new SecOption();
+                SecOptionDTO secOptionDTO = new SecOptionDTO();
                 if(secOption.getId()!=null){
                     secOption.setId(secOptionDTO.getId());
                     secOption.setUserUpdate(secOptionDTO.getUserUpdate());
                 }
+                searchDTO.setIdApi(secOptionDTO.getIdApi());
                 secOption.setIdEvento(secOption.getIdEvento());
                 secOption.setStatus("A");
                 secOption.setPermit(secOptionDTO.getPermit());
@@ -68,25 +62,6 @@ public class SecOptionService {
     }
 
 
-//    public List<MasterTypeElementsDTO> getMaterElement(String typeFilter){
-//        try{
-//            return masterTypeElementsMapper.masterTypeElementsToMasterTypeElementsDTO(masterTypeElementsRepository.findByTypeFilterAndStateReg(typeFilter, Boolean.TRUE));
-//
-//        }catch (Exception ex){
-//            return new ArrayList();
-//        }
-//    }
-
-//    public List<ApiRouteDTO> getId (long id) {
-//
-//        try{
-//            return secOptionMapper.toSecOptionDTOPageList(secOptionRepository.findAllById(id));
-//        }
-//        catch (Exception ex){
-//            return new ArrayList<>();
-//        }
-//
-//    }
 
 
     //PAGINADO

@@ -21,7 +21,7 @@ public interface SecUserPerfilRepository extends JpaRepository<SecUserPerfil, Lo
             " and sup.secPerfil.id =:idUser")
     SecUserPerfil deleteId(@Param("idPerfil") Long idPerfil, @Param("idUser") String idUser);
 
-    @Query(nativeQuery = false, value = "select sup.secPerfil " +
+    @Query(nativeQuery = false, value = "select sup.userEntity " +
             "from SecUserPerfil sup " +
             "where sup.secPerfil.id=:idPerfil")
     List<UserEntity> getApp(@Param("idPerfil") Long idPerfil );
@@ -29,7 +29,10 @@ public interface SecUserPerfilRepository extends JpaRepository<SecUserPerfil, Lo
 
     @Query(nativeQuery = false, value = "select ue " +
             "from UserEntity ue" +
-            " where (select count(sup) from SecUserPerfil sup where sup.secPerfil=ue )=0" )
+            " join ue.realmEntity ri" +
+            " where (select count(sup) from SecUserPerfil sup where sup.userEntity=ue )=0" +
+            " and ri.name <>'master'" +
+            " and ue.email is not null" )
     List<UserEntity> getNotApp();
 
 

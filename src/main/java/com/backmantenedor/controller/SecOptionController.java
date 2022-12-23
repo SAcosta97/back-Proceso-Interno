@@ -23,8 +23,8 @@ public class SecOptionController {
 
 
     @PostMapping("saveUpdateSecOption")
-    public SaveMantDTO saveApi(@RequestBody @Validated SecOptionDTO secOptionDTO) throws Exception {
-        return secOptionService.saveOption(secOptionDTO);
+    public SaveMantDTO saveApi(@RequestBody @Validated SearchDTO searchDTO) throws Exception {
+        return secOptionService.saveOption(searchDTO);
     }
 //    @GetMapping("/id")
 //    public List<SecOptionDTO> getId(@RequestParam long id){ return api_routeService.getId(id);}
